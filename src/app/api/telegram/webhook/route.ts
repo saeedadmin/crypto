@@ -1,17 +1,10 @@
-import { NextApiRequest, NextApiResponse } from 'next'
+import { NextRequest, NextResponse } from 'next/server'
 import { TelegramUpdate, sendTelegramMessage } from '@/lib/telegram'
 import { supabase } from '@/lib/supabase'
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
-  if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Method not allowed' })
-  }
-
+export async function POST(request: NextRequest) {
   try {
-    const update: TelegramUpdate = req.body
+    const update: TelegramUpdate = await request.json()
 
     console.log('Received update:', JSON.stringify(update, null, 2))
 
@@ -25,10 +18,10 @@ export default async function handler(
       await handleCallbackQuery(update)
     }
 
-    res.status(200).json({ ok: true })
+    return NextResponse.json({ ok: true })
   } catch (error) {
     console.error('Webhook error:', error)
-    res.status(500).json({ error: 'Internal server error' })
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
   }
 }
 
@@ -69,9 +62,6 @@ async function handleCallbackQuery(update: TelegramUpdate) {
   if (data === 'get_help') {
     await handleHelpCommand(chatId)
   }
-
-  // Answer the callback query to remove loading state
-  // Note: This would need the answerCallbackQuery API call in a real implementation
 }
 
 async function handleStartCommand(chatId: number, firstName: string) {
