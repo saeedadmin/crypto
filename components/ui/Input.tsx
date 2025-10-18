@@ -1,5 +1,4 @@
 import React, { forwardRef } from 'react'
-import { motion } from 'framer-motion'
 import { LucideIcon } from 'lucide-react'
 
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
@@ -42,13 +41,9 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((
       </div>
       
       {error && (
-        <motion.p
-          initial={{ opacity: 0, height: 0 }}
-          animate={{ opacity: 1, height: 'auto' }}
-          className="mt-2 text-sm text-red-400"
-        >
+        <p className="mt-2 text-sm text-red-400">
           {error}
-        </motion.p>
+        </p>
       )}
       
       {helperText && !error && (
