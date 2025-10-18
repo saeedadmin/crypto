@@ -1,0 +1,150 @@
+{
+  "deployments": [
+    {
+      "uid": "dpl_7ETwoTeTPvcxijMGZR7te4DADvD1",
+      "name": "crypto-bot-clean",
+      "projectId": "prj_rVgOhrzmE332vkQi0lguBhQYK97C",
+      "url": "crypto-bot-clean-rf3cdck1j-saeedmrpg-gmailcoms-projects.vercel.app",
+      "created": 1760819773940,
+      "source": "git",
+      "state": "ERROR",
+      "readyState": "ERROR",
+      "type": "LAMBDAS",
+      "creator": {
+        "uid": "uANSQmhAsrgh7ksji7uG4hsu",
+        "email": "saeedmrpg@gmail.com",
+        "username": "saeedmrpg-9520"
+      },
+      "inspectorUrl": "https://vercel.com/saeedmrpg-gmailcoms-projects/crypto-bot-clean/7ETwoTeTPvcxijMGZR7te4DADvD1",
+      "meta": {
+        "githubCommitAuthorName": "MiniMax Agent",
+        "githubCommitAuthorEmail": "agent@minimax.com",
+        "githubCommitMessage": "fix: Remove problematic .npmrc causing Vercel build errors\n\n- Removed .npmrc file that was conflicting with Vercel's build environment\n- The prefix configuration was preventing proper npm operations during deployment",
+        "githubCommitOrg": "saeedadmin",
+        "githubCommitRef": "main",
+        "githubCommitRepo": "crypto",
+        "githubCommitSha": "ec8f307f82eac95a8b4113db244a73daf8042b46",
+        "githubDeployment": "1",
+        "githubOrg": "saeedadmin",
+        "githubRepo": "crypto",
+        "githubRepoOwnerType": "User",
+        "githubCommitRepoId": "1078436255",
+        "githubRepoId": "1078436255",
+        "githubRepoVisibility": "public",
+        "githubHost": "github.com",
+        "repoPushedAt": "1760819771000",
+        "branchAlias": "crypto-bot-clean-git-main-saeedmrpg-gmailcoms-projects.vercel.app"
+      },
+      "target": "production",
+      "aliasAssigned": null,
+      "isRollbackCandidate": false,
+      "createdAt": 1760819773940,
+      "buildingAt": 1760819774814,
+      "ready": 1760819785317,
+      "errorCode": "BUILD_UTILS_SPAWN_1",
+      "errorMessage": "Command \"npm run build\" exited with 1",
+      "projectSettings": {
+        "commandForIgnoringBuildStep": null
+      }
+    },
+    {
+      "uid": "dpl_7md6Vn1fHQCai5ozxm5yop6otmrx",
+      "name": "crypto-bot-clean",
+      "projectId": "prj_rVgOhrzmE332vkQi0lguBhQYK97C",
+      "url": "crypto-bot-clean-i18wjtth4-saeedmrpg-gmailcoms-projects.vercel.app",
+      "created": 1760819552842,
+      "source": "git",
+      "state": "ERROR",
+      "readyState": "ERROR",
+      "type": "LAMBDAS",
+      "creator": {
+        "uid": "uANSQmhAsrgh7ksji7uG4hsu",
+        "email": "saeedmrpg@gmail.com",
+        "username": "saeedmrpg-9520"
+      },
+      "inspectorUrl": "https://vercel.com/saeedmrpg-gmailcoms-projects/crypto-bot-clean/7md6Vn1fHQCai5ozxm5yop6otmrx",
+      "meta": {
+        "githubCommitAuthorName": "MiniMax Agent",
+        "githubCommitAuthorEmail": "agent@minimax.com",
+        "githubCommitMessage": "feat: Enhanced modal UX and improved timestamp display\n\n- Hide header and navigation when modal is open for better focus\n- Real-time timestamp display with live seconds counter\n- Horizontal time layout with current time and last update\n- Time ago indicator (e.g., '30s ago', '2m ago')\n- Improved time formatting with day, hour, minute, second display\n- Prevent header interference with modal expansion\n- Smooth header show/hide animations",
+        "githubCommitOrg": "saeedadmin",
+        "githubCommitRef": "main",
+        "githubCommitRepo": "crypto",
+        "githubCommitSha": "c60088a34e721edc07865185e89d505edc6b6a09",
+        "githubDeployment": "1",
+        "githubOrg": "saeedadmin",
+        "githubRepo": "crypto",
+        "githubRepoOwnerType": "User",
+        "githubCommitRepoId": "1078436255",
+        "githubRepoId": "1078436255",
+        "githubRepoVisibility": "public",
+        "githubHost": "github.com",
+        "repoPushedAt": "1760819550000",
+        "branchAlias": "crypto-bot-clean-git-main-saeedmrpg-gmailcoms-projects.vercel.app"
+      },
+      "target": "production",
+      "aliasAssigned": null,
+      "isRollbackCandidate": false,
+      "createdAt": 1760819552842,
+      "buildingAt": 1760819591932,
+      "ready": 1760819602600,
+      "errorCode": "BUILD_UTILS_SPAWN_1",
+      "errorMessage": "Command \"npm run build\" exited with 1",
+      "projectSettings": {
+        "commandForIgnoringBuildStep": null
+      }
+    },
+    {
+      "uid": "dpl_CnkdH8ZLpy8YxKgxfjHdWV1EYmUD",
+      "name": "crypto-bot-clean",
+      "projectId": "prj_rVgOhrzmE332vkQi0lguBhQYK97C",
+      "url": "crypto-bot-clean-jwxmd48id-saeedmrpg-gmailcoms-projects.vercel.app",
+      "created": 1760818920874,
+      "source": "git",
+      "state": "READY",
+      "readyState": "READY",
+      "readySubstate": "PROMOTED",
+      "type": "LAMBDAS",
+      "creator": {
+        "uid": "uANSQmhAsrgh7ksji7uG4hsu",
+        "email": "saeedmrpg@gmail.com",
+        "username": "saeedmrpg-9520"
+      },
+      "inspectorUrl": "https://vercel.com/saeedmrpg-gmailcoms-projects/crypto-bot-clean/CnkdH8ZLpy8YxKgxfjHdWV1EYmUD",
+      "meta": {
+        "githubCommitAuthorName": "MiniMax Agent",
+        "githubCommitAuthorEmail": "agent@minimax.com",
+        "githubCommitMessage": "fix: Smooth updates without card flickering and improved modal positioning\n\n- Added separate loading state for updates vs initial load\n- Cards now stay visible during price updates with smooth transitions\n- Fixed modal positioning to prevent scrolling issues\n- Added scroll lock when modal is open\n- Auto scroll to top when modal opens\n- Added updating indicator in stats section\n- Disabled update button during refresh\n- Enhanced modal overlay with full viewport coverage",
+        "githubCommitOrg": "saeedadmin",
+        "githubCommitRef": "main",
+        "githubCommitRepo": "crypto",
+        "githubCommitSha": "1bbb070be734c46d4a3c228f5ba7576a23ddd75d",
+        "githubDeployment": "1",
+        "githubOrg": "saeedadmin",
+        "githubRepo": "crypto",
+        "githubRepoOwnerType": "User",
+        "githubCommitRepoId": "1078436255",
+        "githubRepoId": "1078436255",
+        "githubRepoVisibility": "public",
+        "githubHost": "github.com",
+        "repoPushedAt": "1760818918000",
+        "branchAlias": "crypto-bot-clean-git-main-saeedmrpg-gmailcoms-projects.vercel.app"
+      },
+      "target": "production",
+      "aliasError": null,
+      "aliasAssigned": 1760819027386,
+      "isRollbackCandidate": false,
+      "createdAt": 1760818920874,
+      "buildingAt": 1760819002877,
+      "ready": 1760819027212,
+      "projectSettings": {
+        "commandForIgnoringBuildStep": null
+      }
+    }
+  ],
+  "pagination": {
+    "count": 3,
+    "next": 1760818920874,
+    "prev": 1760819773940
+  }
+}

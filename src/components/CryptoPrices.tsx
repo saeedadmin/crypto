@@ -117,8 +117,8 @@ export default function CryptoPrices() {
     if (selectedCrypto) {
       document.body.style.overflow = 'hidden';
       // Hide header and nav
-      const header = document.querySelector('.header');
-      const nav = document.querySelector('.nav');
+      const header = document.querySelector('.header') as HTMLElement;
+      const nav = document.querySelector('.nav') as HTMLElement;
       if (header) header.style.display = 'none';
       if (nav) nav.style.display = 'none';
       // Scroll to top when modal opens
@@ -126,8 +126,8 @@ export default function CryptoPrices() {
     } else {
       document.body.style.overflow = 'unset';
       // Show header and nav
-      const header = document.querySelector('.header');
-      const nav = document.querySelector('.nav');
+      const header = document.querySelector('.header') as HTMLElement;
+      const nav = document.querySelector('.nav') as HTMLElement;
       if (header) header.style.display = 'block';
       if (nav) nav.style.display = 'block';
     }
@@ -135,8 +135,8 @@ export default function CryptoPrices() {
     // Cleanup function
     return () => {
       document.body.style.overflow = 'unset';
-      const header = document.querySelector('.header');
-      const nav = document.querySelector('.nav');
+      const header = document.querySelector('.header') as HTMLElement;
+      const nav = document.querySelector('.nav') as HTMLElement;
       if (header) header.style.display = 'block';
       if (nav) nav.style.display = 'block';
     };
