@@ -40,7 +40,8 @@ export default function CryptoPrices() {
   const [loading, setLoading] = useState(true);
   const [updating, setUpdating] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [lastUpdate, setLastUpdate] = useState<string>('');
+  const [lastUpdate, setLastUpdate] = useState<Date | null>(null);
+  const [currentTime, setCurrentTime] = useState<Date>(new Date());
   const [selectedCrypto, setSelectedCrypto] = useState<CryptoData | null>(null);
   const [sortField, setSortField] = useState<SortField>('rank');
   const [sortDirection, setSortDirection] = useState<SortDirection>('asc');
@@ -60,14 +61,7 @@ export default function CryptoPrices() {
       if (result.success) {
         setCryptoData(result.data);
         setFilteredData(result.data);
-        setLastUpdate(new Date().toLocaleString('en-US', {
-          year: 'numeric',
-          month: 'short',
-          day: 'numeric',
-          hour: '2-digit',
-          minute: '2-digit',
-          second: '2-digit',
-        }));
+        setLastUpdate(new Date());
         setError(null);
       } else {
         setError('Failed to fetch cryptocurrency data');
@@ -90,6 +84,14 @@ export default function CryptoPrices() {
     return () => clearInterval(interval);
   }, []);
 
+  // Timer for current time updates
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentTime(new Date());
+    }, 1000);
+    return () => clearInterval(timer);
+  }, []);
+
   useEffect(() => {
     let filtered = cryptoData.filter(crypto =>
       crypto.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -110,19 +112,33 @@ export default function CryptoPrices() {
     setFilteredData(filtered);
   }, [cryptoData, sortField, sortDirection, searchTerm]);
 
-  // Handle modal body scroll lock
+  // Handle modal and header visibility
   useEffect(() => {
     if (selectedCrypto) {
       document.body.style.overflow = 'hidden';
+      // Hide header and nav
+      const header = document.querySelector('.header');
+      const nav = document.querySelector('.nav');
+      if (header) header.style.display = 'none';
+      if (nav) nav.style.display = 'none';
       // Scroll to top when modal opens
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } else {
       document.body.style.overflow = 'unset';
+      // Show header and nav
+      const header = document.querySelector('.header');
+      const nav = document.querySelector('.nav');
+      if (header) header.style.display = 'block';
+      if (nav) nav.style.display = 'block';
     }
     
     // Cleanup function
     return () => {
       document.body.style.overflow = 'unset';
+      const header = document.querySelector('.header');
+      const nav = document.querySelector('.nav');
+      if (header) header.style.display = 'block';
+      if (nav) nav.style.display = 'block';
     };
   }, [selectedCrypto]);
 
@@ -162,6 +178,52 @@ export default function CryptoPrices() {
   const getSortIcon = (field: SortField) => {
     if (sortField !== field) return '↕️';
     return sortDirection === 'asc' ? '↑' : '↓';
+  };
+
+  const formatTimeAgo = (date: Date | null): string => {
+    if (!date) return 'Never';
+    
+    const now = currentTime;
+    const diffInSeconds = Math.floor((now.getTime() - date.getTime()) / 1000);
+    
+    if (diffInSeconds < 60) {
+      return `${diffInSeconds}s ago`;
+    } else if (diffInSeconds < 3600) {
+      const minutes = Math.floor(diffInSeconds / 60);
+      return `${minutes}m ago`;
+    } else if (diffInSeconds < 86400) {
+      const hours = Math.floor(diffInSeconds / 3600);
+      return `${hours}h ago`;
+    } else {
+      const days = Math.floor(diffInSeconds / 86400);
+      return `${days}d ago`;
+    }
+  };
+
+  const formatCurrentTime = (): string => {
+    return currentTime.toLocaleString('en-US', {
+      weekday: 'short',
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      hour12: true
+    });
+  };
+
+  const formatLastUpdateTime = (): string => {
+    if (!lastUpdate) return 'Never updated';
+    
+    return lastUpdate.toLocaleString('en-US', {
+      month: 'short',
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      hour12: true
+    });
   };
 
   if (loading) {
@@ -215,7 +277,14 @@ export default function CryptoPrices() {
                     🔄 Updating...
                   </span>
                 ) : (
-                  lastUpdate
+                  <div className="time-display">
+                    <div className="last-update-time">
+                      {formatLastUpdateTime()} • {formatTimeAgo(lastUpdate)}
+                    </div>
+                    <div className="current-time">
+                      Current: {formatCurrentTime()}
+                    </div>
+                  </div>
                 )}
               </span>
               <span className="stat-label">Last Updated</span>
