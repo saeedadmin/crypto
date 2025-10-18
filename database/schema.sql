@@ -1,49 +1,92 @@
--- Users table
+-- Crypto Bot Database Schema
+-- Run these commands in your Supabase SQL editor
+
+-- Enable UUID extension
+CREATE EXTENSION IF NOT EXISTS \"uuid-ossp\";
+
+-- Users table - stores Telegram user information
 CREATE TABLE IF NOT EXISTS users (
-  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
-  email VARCHAR(255) UNIQUE NOT NULL,
-  password_hash VARCHAR(255) NOT NULL,
-  telegram_id VARCHAR(50),
-  telegram_verified BOOLEAN DEFAULT FALSE,
+  id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+  telegram_id BIGINT UNIQUE NOT NULL,
+  username TEXT,
+  first_name TEXT,
+  last_name TEXT,
+  language_code TEXT DEFAULT 'en',
+  is_active BOOLEAN DEFAULT true,
   created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
   updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );
 
--- Alerts table
+-- Alerts table - stores price alert settings
 CREATE TABLE IF NOT EXISTS alerts (
-  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
-  user_id UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-  coin_id VARCHAR(50) NOT NULL,
-  coin_name VARCHAR(100) NOT NULL,
-  coin_symbol VARCHAR(20) NOT NULL,
-  alert_type VARCHAR(20) CHECK (alert_type IN ('price', 'percentage')) NOT NULL,
-  target_price DECIMAL(20, 8),
-  percentage_change DECIMAL(5, 2),
-  comparison VARCHAR(20) CHECK (comparison IN ('above', 'below', 'increase', 'decrease')) NOT NULL,
-  is_active BOOLEAN DEFAULT TRUE,
-  triggered BOOLEAN DEFAULT FALSE,
+  id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+  user_id UUID REFERENCES users(id) ON DELETE CASCADE,
+  symbol TEXT NOT NULL, -- e.g., 'BTC', 'ETH'
+  target_price DECIMAL(20,8) NOT NULL,
+  condition TEXT CHECK (condition IN ('above', 'below')) NOT NULL,
+  is_active BOOLEAN DEFAULT true,
+  triggered_at TIMESTAMP WITH TIME ZONE,
   created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
   updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );
 
--- Telegram users mapping table
-CREATE TABLE IF NOT EXISTS telegram_users (
-  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
-  telegram_id VARCHAR(50) UNIQUE NOT NULL,
-  user_email VARCHAR(255) NOT NULL REFERENCES users(email),
-  verified_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+-- Portfolio table - stores user's crypto holdings
+CREATE TABLE IF NOT EXISTS portfolio (
+  id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+  user_id UUID REFERENCES users(id) ON DELETE CASCADE,
+  symbol TEXT NOT NULL,
+  amount DECIMAL(20,8) NOT NULL,
+  average_price DECIMAL(20,8),
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+  updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+  UNIQUE(user_id, symbol)
 );
 
--- Indexes for better performance
-CREATE INDEX IF NOT EXISTS idx_users_email ON users(email);
-CREATE INDEX IF NOT EXISTS idx_users_telegram_id ON users(telegram_id);
-CREATE INDEX IF NOT EXISTS idx_alerts_user_id ON alerts(user_id);
-CREATE INDEX IF NOT EXISTS idx_alerts_coin_id ON alerts(coin_id);
-CREATE INDEX IF NOT EXISTS idx_alerts_active ON alerts(is_active);
-CREATE INDEX IF NOT EXISTS idx_alerts_triggered ON alerts(triggered);
-CREATE INDEX IF NOT EXISTS idx_telegram_users_telegram_id ON telegram_users(telegram_id);
+-- Transactions table - stores buy/sell transactions
+CREATE TABLE IF NOT EXISTS transactions (
+  id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+  user_id UUID REFERENCES users(id) ON DELETE CASCADE,
+  symbol TEXT NOT NULL,
+  type TEXT CHECK (type IN ('buy', 'sell')) NOT NULL,
+  amount DECIMAL(20,8) NOT NULL,
+  price DECIMAL(20,8) NOT NULL,
+  total_value DECIMAL(20,8) NOT NULL,
+  exchange TEXT,
+  notes TEXT,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
 
--- Update triggers for updated_at
+-- Bot commands log - track bot usage
+CREATE TABLE IF NOT EXISTS command_logs (
+  id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+  user_id UUID REFERENCES users(id) ON DELETE CASCADE,
+  command TEXT NOT NULL,
+  message_text TEXT,
+  response_sent BOOLEAN DEFAULT false,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+
+-- Create indexes for better performance
+CREATE INDEX IF NOT EXISTS idx_users_telegram_id ON users(telegram_id);
+CREATE INDEX IF NOT EXISTS idx_users_is_active ON users(is_active);
+
+CREATE INDEX IF NOT EXISTS idx_alerts_user_id ON alerts(user_id);
+CREATE INDEX IF NOT EXISTS idx_alerts_symbol ON alerts(symbol);
+CREATE INDEX IF NOT EXISTS idx_alerts_is_active ON alerts(is_active);
+CREATE INDEX IF NOT EXISTS idx_alerts_condition ON alerts(condition);
+
+CREATE INDEX IF NOT EXISTS idx_portfolio_user_id ON portfolio(user_id);
+CREATE INDEX IF NOT EXISTS idx_portfolio_symbol ON portfolio(symbol);
+
+CREATE INDEX IF NOT EXISTS idx_transactions_user_id ON transactions(user_id);
+CREATE INDEX IF NOT EXISTS idx_transactions_symbol ON transactions(symbol);
+CREATE INDEX IF NOT EXISTS idx_transactions_created_at ON transactions(created_at);
+
+CREATE INDEX IF NOT EXISTS idx_command_logs_user_id ON command_logs(user_id);
+CREATE INDEX IF NOT EXISTS idx_command_logs_command ON command_logs(command);
+CREATE INDEX IF NOT EXISTS idx_command_logs_created_at ON command_logs(created_at);
+
+-- Create updated_at trigger function
 CREATE OR REPLACE FUNCTION update_updated_at_column()
 RETURNS TRIGGER AS $$
 BEGIN
@@ -52,48 +95,57 @@ BEGIN
 END;
 $$ language 'plpgsql';
 
-CREATE TRIGGER update_users_updated_at BEFORE UPDATE ON users
-    FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
+-- Add triggers to automatically update updated_at
+CREATE TRIGGER update_users_updated_at 
+  BEFORE UPDATE ON users 
+  FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
 
-CREATE TRIGGER update_alerts_updated_at BEFORE UPDATE ON alerts
-    FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
+CREATE TRIGGER update_alerts_updated_at 
+  BEFORE UPDATE ON alerts 
+  FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
+
+CREATE TRIGGER update_portfolio_updated_at 
+  BEFORE UPDATE ON portfolio 
+  FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
 
 -- Row Level Security (RLS) policies
 ALTER TABLE users ENABLE ROW LEVEL SECURITY;
 ALTER TABLE alerts ENABLE ROW LEVEL SECURITY;
-ALTER TABLE telegram_users ENABLE ROW LEVEL SECURITY;
+ALTER TABLE portfolio ENABLE ROW LEVEL SECURITY;
+ALTER TABLE transactions ENABLE ROW LEVEL SECURITY;
+ALTER TABLE command_logs ENABLE ROW LEVEL SECURITY;
 
--- Users can only see their own data
-CREATE POLICY "Users can view own profile" ON users
-    FOR SELECT USING (id = auth.uid());
+-- Basic RLS policies (adjust according to your security needs)
+-- For now, we'll allow all operations as the bot will handle auth
 
-CREATE POLICY "Users can update own profile" ON users
-    FOR UPDATE USING (id = auth.uid());
+CREATE POLICY \"Allow all operations on users\" ON users
+  FOR ALL USING (true);
 
--- Users can only see their own alerts
-CREATE POLICY "Users can view own alerts" ON alerts
-    FOR SELECT USING (user_id = auth.uid());
+CREATE POLICY \"Allow all operations on alerts\" ON alerts
+  FOR ALL USING (true);
 
-CREATE POLICY "Users can insert own alerts" ON alerts
-    FOR INSERT WITH CHECK (user_id = auth.uid());
+CREATE POLICY \"Allow all operations on portfolio\" ON portfolio
+  FOR ALL USING (true);
 
-CREATE POLICY "Users can update own alerts" ON alerts
-    FOR UPDATE USING (user_id = auth.uid());
+CREATE POLICY \"Allow all operations on transactions\" ON transactions
+  FOR ALL USING (true);
 
-CREATE POLICY "Users can delete own alerts" ON alerts
-    FOR DELETE USING (user_id = auth.uid());
+CREATE POLICY \"Allow all operations on command_logs\" ON command_logs
+  FOR ALL USING (true);
 
 -- Sample data (optional)
--- INSERT INTO users (email, password_hash) VALUES 
--- ('demo@example.com', '$2a$12$example.hash.here');
+-- INSERT INTO users (telegram_id, username, first_name) 
+-- VALUES (123456789, 'testuser', 'Test User');
 
--- Comments for documentation
-COMMENT ON TABLE users IS 'User accounts and authentication data';
-COMMENT ON TABLE alerts IS 'Price and percentage alerts set by users';
-COMMENT ON TABLE telegram_users IS 'Mapping between Telegram IDs and user emails';
+-- Comments for future features
+/*
+Future tables to consider:
 
-COMMENT ON COLUMN alerts.alert_type IS 'Type of alert: price (absolute price) or percentage (price change %)';
-COMMENT ON COLUMN alerts.comparison IS 'Comparison type: above/below for price alerts, increase/decrease for percentage alerts';
-COMMENT ON COLUMN alerts.target_price IS 'Target price for price alerts (in USD)';
-COMMENT ON COLUMN alerts.percentage_change IS 'Percentage change threshold for percentage alerts';
-COMMENT ON COLUMN alerts.triggered IS 'Whether the alert has been triggered and notification sent';
+1. price_cache - Cache crypto prices
+2. subscriptions - Premium features
+3. user_settings - User preferences
+4. notifications - Notification history
+5. market_data - Historical price data
+6. trading_pairs - Supported trading pairs
+7. exchanges - Exchange information
+*/
