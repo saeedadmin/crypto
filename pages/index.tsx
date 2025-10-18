@@ -1,6 +1,5 @@
 import React from 'react'
 import Link from 'next/link'
-import { motion } from 'framer-motion'
 import { TrendingUp, Bell, Shield, Zap, Users, BarChart3 } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
 import { Card } from '@/components/ui/Card'
@@ -57,32 +56,23 @@ export default function HomePage() {
         
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <motion.h1 
-              className="text-5xl md:text-7xl font-bold text-white mb-6"
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
+            <h1 
+              className="text-5xl md:text-7xl font-bold text-white mb-6"}}}
             >
               Track Crypto.
               <span className="text-gradient block">Stay Ahead.</span>
-            </motion.h1>
+            </h1>
             
-            <motion.p 
-              className="text-xl text-gray-400 mb-10 max-w-3xl mx-auto"
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
+            <p 
+              className="text-xl text-gray-400 mb-10 max-w-3xl mx-auto"}}}
             >
               Monitor cryptocurrency prices in real-time, set intelligent alerts, 
               and never miss important market movements. Get instant notifications 
               directly to your Telegram.
-            </motion.p>
+            </p>
             
-            <motion.div 
-              className="flex flex-col sm:flex-row gap-4 justify-center"
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
+            <div 
+              className="flex flex-col sm:flex-row gap-4 justify-center"}}}
             >
               <Link href="/auth/register">
                 <Button size="lg" className="min-w-[200px]">
@@ -95,7 +85,7 @@ export default function HomePage() {
                   Sign In
                 </Button>
               </Link>
-            </motion.div>
+            </div>
           </div>
         </div>
       </section>
@@ -105,12 +95,9 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {stats.map((stat, index) => (
-              <motion.div
+              <div
                 key={stat.label}
-                className="text-center"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
+                className="text-center"}}}
               >
                 <div className="text-3xl md:text-4xl font-bold text-gradient mb-2">
                   {stat.value}
@@ -118,7 +105,7 @@ export default function HomePage() {
                 <div className="text-gray-400 text-sm md:text-base">
                   {stat.label}
                 </div>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
@@ -128,24 +115,18 @@ export default function HomePage() {
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <motion.h2 
-              className="text-4xl md:text-5xl font-bold text-white mb-6"
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
+            <h2 
+              className="text-4xl md:text-5xl font-bold text-white mb-6"}}}
             >
               Why Choose CryptoWatch?
-            </motion.h2>
+            </h2>
             
-            <motion.p 
-              className="text-xl text-gray-400 max-w-3xl mx-auto"
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
+            <p 
+              className="text-xl text-gray-400 max-w-3xl mx-auto"}}}
             >
               Discover the features that make CryptoWatch the best choice 
               for cryptocurrency tracking and alerts.
-            </motion.p>
+            </p>
           </div>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -153,11 +134,8 @@ export default function HomePage() {
               const Icon = feature.icon
               
               return (
-                <motion.div
-                  key={feature.title}
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                <div
+                  key={feature.title}}}}
                 >
                   <Card className="h-full hover:border-primary-500/50 transition-all duration-300">
                     <div className="flex items-center space-x-4 mb-4">
@@ -173,7 +151,7 @@ export default function HomePage() {
                       {feature.description}
                     </p>
                   </Card>
-                </motion.div>
+                </div>
               )
             })}
           </div>
@@ -183,36 +161,27 @@ export default function HomePage() {
       {/* CTA Section */}
       <section className="py-20 bg-gradient-to-r from-primary-900/20 to-secondary-900/20">
         <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
-          <motion.h2 
-            className="text-4xl md:text-5xl font-bold text-white mb-6"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
+          <h2 
+            className="text-4xl md:text-5xl font-bold text-white mb-6"}}}
           >
             Ready to Get Started?
-          </motion.h2>
+          </h2>
           
-          <motion.p 
-            className="text-xl text-gray-400 mb-10"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
+          <p 
+            className="text-xl text-gray-400 mb-10"}}}
           >
             Join thousands of users who trust CryptoWatch for their 
             cryptocurrency tracking needs. Start for free today!
-          </motion.p>
+          </p>
           
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
+          <div}}}
           >
             <Link href="/auth/register">
               <Button size="lg" className="min-w-[200px]">
                 Start Tracking Now
               </Button>
             </Link>
-          </motion.div>
+          </div>
         </div>
       </section>
       

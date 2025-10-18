@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
-import { motion } from 'framer-motion'
 import { Search, Filter, TrendingUp, TrendingDown, RefreshCw } from 'lucide-react'
 import { Navbar } from '@/components/Navbar'
 import { CoinCard } from '@/components/CoinCard'
@@ -166,11 +165,8 @@ export default function DashboardPage() {
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Header */}
-        <motion.div 
-          className="mb-8"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+        <div 
+          className="mb-8"}}}
         >
           <h1 className="text-3xl md:text-4xl font-bold text-white mb-4">
             Crypto Dashboard
@@ -178,14 +174,11 @@ export default function DashboardPage() {
           <p className="text-gray-400 text-lg">
             Monitor real-time cryptocurrency prices and market movements
           </p>
-        </motion.div>
+        </div>
 
         {/* Market Stats */}
-        <motion.div 
-          className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.1 }}
+        <div 
+          className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8"}}}
         >
           <Card>
             <div className="text-center">
@@ -224,14 +217,11 @@ export default function DashboardPage() {
               <div className="text-gray-400 text-sm">Avg Change (24h)</div>
             </div>
           </Card>
-        </motion.div>
+        </div>
 
         {/* Controls */}
-        <motion.div 
-          className="flex flex-col md:flex-row gap-4 mb-8"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
+        <div 
+          className="flex flex-col md:flex-row gap-4 mb-8"}}}
         >
           <div className="flex-1">
             <Input
@@ -270,14 +260,11 @@ export default function DashboardPage() {
               Refresh
             </Button>
           </div>
-        </motion.div>
+        </div>
 
         {/* Coins Grid */}
-        <motion.div 
-          className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
+        <div 
+          className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"}}}
         >
           {filteredCoins.map((coin, index) => (
             <CoinCard
@@ -287,19 +274,16 @@ export default function DashboardPage() {
               onClick={() => handleCoinClick(coin)}
             />
           ))}
-        </motion.div>
+        </div>
 
         {filteredCoins.length === 0 && !loading && (
-          <motion.div 
-            className="text-center py-12"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.6 }}
+          <div 
+            className="text-center py-12"}}}
           >
             <p className="text-gray-400 text-lg">
               No cryptocurrencies found matching your search.
             </p>
-          </motion.div>
+          </div>
         )}
       </div>
     </div>

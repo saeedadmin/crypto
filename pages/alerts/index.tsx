@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
-import { motion } from 'framer-motion'
 import { Plus, Bell, BellOff, Edit, Trash2, ToggleLeft, ToggleRight } from 'lucide-react'
 import { Navbar } from '@/components/Navbar'
 import { Card } from '@/components/ui/Card'
@@ -149,11 +148,8 @@ export default function AlertsPage() {
       
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Header */}
-        <motion.div 
-          className="flex justify-between items-center mb-8"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+        <div 
+          className="flex justify-between items-center mb-8"}}}
         >
           <div>
             <h1 className="text-3xl md:text-4xl font-bold text-white mb-2">
@@ -171,15 +167,12 @@ export default function AlertsPage() {
           >
             Create Alert
           </Button>
-        </motion.div>
+        </div>
 
         {/* Telegram Warning */}
         {user && !user.telegram_verified && (
-          <motion.div 
-            className="mb-6"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
+          <div 
+            className="mb-6"}}}
           >
             <Card className="border-yellow-500/50 bg-yellow-900/20">
               <div className="flex items-center space-x-3">
@@ -201,15 +194,12 @@ export default function AlertsPage() {
                 </Button>
               </div>
             </Card>
-          </motion.div>
+          </div>
         )}
 
         {/* Alerts List */}
-        <motion.div 
-          className="space-y-4"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
+        <div 
+          className="space-y-4"}}}
         >
           {alerts.length === 0 ? (
             <Card>
@@ -231,11 +221,8 @@ export default function AlertsPage() {
             </Card>
           ) : (
             alerts.map((alert, index) => (
-              <motion.div
-                key={alert.id}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.3, delay: index * 0.05 }}
+              <div
+                key={alert.id}}}}
               >
                 <Card className={`${
                   alert.is_active ? 'border-gray-700' : 'border-gray-800 opacity-75'
@@ -300,10 +287,10 @@ export default function AlertsPage() {
                     </div>
                   </div>
                 </Card>
-              </motion.div>
+              </div>
             ))
           )}
-        </motion.div>
+        </div>
       </div>
     </div>
   )

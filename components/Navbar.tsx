@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { motion, AnimatePresence } from 'framer-motion'
 import { 
   Menu, 
   X, 
@@ -47,16 +46,14 @@ export const Navbar: React.FC<NavbarProps> = ({ user, onLogout }) => {
           {/* Logo */}
           <div className="flex items-center">
             <Link href={user ? '/dashboard' : '/'} className="flex items-center space-x-2">
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+              <div}}
                 className="flex items-center space-x-2"
               >
                 <TrendingUp className="h-8 w-8 text-primary-500" />
                 <span className="text-xl font-bold text-gradient">
                   CryptoWatch
                 </span>
-              </motion.div>
+              </div>
             </Link>
           </div>
 
@@ -139,12 +136,9 @@ export const Navbar: React.FC<NavbarProps> = ({ user, onLogout }) => {
       </div>
 
       {/* Mobile Navigation */}
-      <AnimatePresence>
+      
         {isMobileMenuOpen && user && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
+          <div}}}
             className="md:hidden bg-gray-900 border-t border-gray-800"
           >
             <div className="px-2 pt-2 pb-3 space-y-1">
@@ -190,9 +184,9 @@ export const Navbar: React.FC<NavbarProps> = ({ user, onLogout }) => {
                 </button>
               </div>
             </div>
-          </motion.div>
+          </div>
         )}
-      </AnimatePresence>
+      
     </nav>
   )
 }

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
-import { motion } from 'framer-motion'
 import { User, Mail, MessageCircle, Check, X, Copy, ExternalLink } from 'lucide-react'
 import { Navbar } from '@/components/Navbar'
 import { Card } from '@/components/ui/Card'
@@ -115,11 +114,8 @@ export default function ProfilePage() {
       
       <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Header */}
-        <motion.div 
-          className="mb-8"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+        <div 
+          className="mb-8"}}}
         >
           <h1 className="text-3xl md:text-4xl font-bold text-white mb-2">
             Profile Settings
@@ -127,14 +123,11 @@ export default function ProfilePage() {
           <p className="text-gray-400">
             Manage your account and notification preferences
           </p>
-        </motion.div>
+        </div>
 
         {/* Account Info */}
-        <motion.div 
-          className="mb-6"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.1 }}
+        <div 
+          className="mb-6"}}}
         >
           <Card>
             <h2 className="text-xl font-semibold text-white mb-4 flex items-center space-x-2">
@@ -174,14 +167,11 @@ export default function ProfilePage() {
               </div>
             </div>
           </Card>
-        </motion.div>
+        </div>
 
         {/* Telegram Setup */}
-        <motion.div 
-          className="mb-6"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
+        <div 
+          className="mb-6"}}}
         >
           <Card>
             <h2 className="text-xl font-semibold text-white mb-4 flex items-center space-x-2">
@@ -289,13 +279,10 @@ export default function ProfilePage() {
               )}
             </div>
           </Card>
-        </motion.div>
+        </div>
 
         {/* Instructions */}
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
+        <div}}}
         >
           <Card>
             <h2 className="text-xl font-semibold text-white mb-4">
@@ -332,7 +319,7 @@ export default function ProfilePage() {
               </div>
             </div>
           </Card>
-        </motion.div>
+        </div>
       </div>
     </div>
   )

@@ -1,0 +1,105 @@
+[
+{"type":"stdout","created":1760776856896,"payload":{"deploymentId":"dpl_FV2SRGov8ACF4QdhQaYQxVW6eb72","info":{"type":"build","name":"bld_2i6njzo3z","entrypoint":"."},"text":"Running build in Washington, D.C., USA (East) – iad1","id":"1760776856896254198924700000","date":1760776856896,"serial":"1760776856896254198924700000"}}
+,
+{"type":"stdout","created":1760776856897,"payload":{"deploymentId":"dpl_FV2SRGov8ACF4QdhQaYQxVW6eb72","info":{"type":"build","name":"bld_2i6njzo3z","entrypoint":"."},"text":"Build machine configuration: 2 cores, 8 GB","id":"1760776856897254198924700000","date":1760776856897,"serial":"1760776856897254198924700000"}}
+,
+{"type":"stdout","created":1760776856939,"payload":{"deploymentId":"dpl_FV2SRGov8ACF4QdhQaYQxVW6eb72","info":{"type":"build","name":"bld_2i6njzo3z","entrypoint":"."},"text":"Cloning github.com/saeedadmin/crypto (Branch: master, Commit: 324a91a)","id":"1760776856939254198924700000","date":1760776856939,"serial":"1760776856939254198924700000"}}
+,
+{"type":"stdout","created":1760776857100,"payload":{"deploymentId":"dpl_FV2SRGov8ACF4QdhQaYQxVW6eb72","info":{"type":"build","name":"bld_2i6njzo3z","entrypoint":"."},"text":"Previous build caches not available","id":"1760776857100254198924700002","date":1760776857100,"serial":"1760776857100254198924700002"}}
+,
+{"type":"stdout","created":1760776857206,"payload":{"deploymentId":"dpl_FV2SRGov8ACF4QdhQaYQxVW6eb72","info":{"type":"build","name":"bld_2i6njzo3z","entrypoint":"."},"text":"Warning: Failed to fetch one or more git submodules","id":"1760776857206254198924700000","date":1760776857206,"serial":"1760776857206254198924700000"}}
+,
+{"type":"stdout","created":1760776857207,"payload":{"deploymentId":"dpl_FV2SRGov8ACF4QdhQaYQxVW6eb72","info":{"type":"build","name":"bld_2i6njzo3z","entrypoint":"."},"text":"Cloning completed: 267.000ms","id":"1760776857207254198924700000","date":1760776857207,"serial":"1760776857207254198924700000"}}
+,
+{"type":"stdout","created":1760776857495,"payload":{"deploymentId":"dpl_FV2SRGov8ACF4QdhQaYQxVW6eb72","info":{"type":"build","name":"bld_2i6njzo3z","entrypoint":"."},"text":"Running \"vercel build\"","id":"1760776857495580699845600001","date":1760776857495,"serial":"1760776857495580699845600001"}}
+,
+{"type":"stderr","created":1760776857881,"payload":{"deploymentId":"dpl_FV2SRGov8ACF4QdhQaYQxVW6eb72","info":{"type":"build","name":"bld_2i6njzo3z","entrypoint":"."},"text":"Vercel CLI 48.2.9","id":"1760776857881580699845600000","date":1760776857881,"serial":"1760776857881580699845600000"}}
+,
+{"type":"stdout","created":1760776858220,"payload":{"deploymentId":"dpl_FV2SRGov8ACF4QdhQaYQxVW6eb72","info":{"type":"build","name":"bld_2i6njzo3z","entrypoint":"."},"text":"Running \"install\" command: `npm install`...","id":"1760776858220580699845600000","date":1760776858220,"serial":"1760776858220580699845600000"}}
+,
+{"type":"stderr","created":1760776858506,"payload":{"deploymentId":"dpl_FV2SRGov8ACF4QdhQaYQxVW6eb72","info":{"type":"build","name":"bld_2i6njzo3z","entrypoint":"."},"text":"npm error config prefix cannot be changed from project config: /vercel/path0/.npmrc.","id":"1760776858506580699845600000","date":1760776858506,"serial":"1760776858506580699845600000"}}
+,
+{"type":"stderr","created":1760776875163,"payload":{"deploymentId":"dpl_FV2SRGov8ACF4QdhQaYQxVW6eb72","info":{"type":"build","name":"bld_2i6njzo3z","entrypoint":"."},"text":"npm warn deprecated har-validator@5.1.5: this library is no longer supported","id":"1760776875163580699845600000","date":1760776875163,"serial":"1760776875163580699845600000"}}
+,
+{"type":"stderr","created":1760776875889,"payload":{"deploymentId":"dpl_FV2SRGov8ACF4QdhQaYQxVW6eb72","info":{"type":"build","name":"bld_2i6njzo3z","entrypoint":"."},"text":"npm warn deprecated request-promise@4.2.6: request-promise has been deprecated because it extends the now deprecated request package, see https://github.com/request/request/issues/3142","id":"1760776875889580699845600000","date":1760776875889,"serial":"1760776875889580699845600000"}}
+,
+{"type":"stderr","created":1760776876474,"payload":{"deploymentId":"dpl_FV2SRGov8ACF4QdhQaYQxVW6eb72","info":{"type":"build","name":"bld_2i6njzo3z","entrypoint":"."},"text":"npm warn deprecated request@2.88.2: request has been deprecated, see https://github.com/request/request/issues/3142","id":"1760776876474580699845600000","date":1760776876474,"serial":"1760776876474580699845600000"}}
+,
+{"type":"stderr","created":1760776876504,"payload":{"deploymentId":"dpl_FV2SRGov8ACF4QdhQaYQxVW6eb72","info":{"type":"build","name":"bld_2i6njzo3z","entrypoint":"."},"text":"npm warn deprecated uuid@3.4.0: Please upgrade  to version 7 or higher.  Older versions may use Math.random() in certain circumstances, which is known to be problematic.  See https://v8.dev/blog/math-random for details.","id":"1760776876504580699845600000","date":1760776876504,"serial":"1760776876504580699845600000"}}
+,
+{"type":"stdout","created":1760776887513,"payload":{"deploymentId":"dpl_FV2SRGov8ACF4QdhQaYQxVW6eb72","info":{"type":"build","name":"bld_2i6njzo3z","entrypoint":"."},"text":"","id":"1760776887513580699845600000","date":1760776887513,"serial":"1760776887513580699845600000"}}
+,
+{"type":"stdout","created":1760776887514,"payload":{"deploymentId":"dpl_FV2SRGov8ACF4QdhQaYQxVW6eb72","info":{"type":"build","name":"bld_2i6njzo3z","entrypoint":"."},"text":"added 365 packages, and audited 366 packages in 29s","id":"1760776887514580699845600000","date":1760776887514,"serial":"1760776887514580699845600000"}}
+,
+{"type":"stdout","created":1760776887514,"payload":{"deploymentId":"dpl_FV2SRGov8ACF4QdhQaYQxVW6eb72","info":{"type":"build","name":"bld_2i6njzo3z","entrypoint":"."},"text":"","id":"1760776887514580699845600001","date":1760776887514,"serial":"1760776887514580699845600001"}}
+,
+{"type":"stdout","created":1760776887515,"payload":{"deploymentId":"dpl_FV2SRGov8ACF4QdhQaYQxVW6eb72","info":{"type":"build","name":"bld_2i6njzo3z","entrypoint":"."},"text":"112 packages are looking for funding","id":"1760776887515580699845600000","date":1760776887515,"serial":"1760776887515580699845600000"}}
+,
+{"type":"stdout","created":1760776887515,"payload":{"deploymentId":"dpl_FV2SRGov8ACF4QdhQaYQxVW6eb72","info":{"type":"build","name":"bld_2i6njzo3z","entrypoint":"."},"text":"  run `npm fund` for details","id":"1760776887515580699845600001","date":1760776887515,"serial":"1760776887515580699845600001"}}
+,
+{"type":"stdout","created":1760776887596,"payload":{"deploymentId":"dpl_FV2SRGov8ACF4QdhQaYQxVW6eb72","info":{"type":"build","name":"bld_2i6njzo3z","entrypoint":"."},"text":"","id":"1760776887596580699845600000","date":1760776887596,"serial":"1760776887596580699845600000"}}
+,
+{"type":"stdout","created":1760776887597,"payload":{"deploymentId":"dpl_FV2SRGov8ACF4QdhQaYQxVW6eb72","info":{"type":"build","name":"bld_2i6njzo3z","entrypoint":"."},"text":"7 vulnerabilities (4 moderate, 3 critical)","id":"1760776887597580699845600000","date":1760776887597,"serial":"1760776887597580699845600000"}}
+,
+{"type":"stdout","created":1760776887597,"payload":{"deploymentId":"dpl_FV2SRGov8ACF4QdhQaYQxVW6eb72","info":{"type":"build","name":"bld_2i6njzo3z","entrypoint":"."},"text":"","id":"1760776887597580699845600001","date":1760776887597,"serial":"1760776887597580699845600001"}}
+,
+{"type":"stdout","created":1760776887597,"payload":{"deploymentId":"dpl_FV2SRGov8ACF4QdhQaYQxVW6eb72","info":{"type":"build","name":"bld_2i6njzo3z","entrypoint":"."},"text":"To address all issues (including breaking changes), run:","id":"1760776887597580699845600002","date":1760776887597,"serial":"1760776887597580699845600002"}}
+,
+{"type":"stdout","created":1760776887598,"payload":{"deploymentId":"dpl_FV2SRGov8ACF4QdhQaYQxVW6eb72","info":{"type":"build","name":"bld_2i6njzo3z","entrypoint":"."},"text":"  npm audit fix --force","id":"1760776887598580699845600000","date":1760776887598,"serial":"1760776887598580699845600000"}}
+,
+{"type":"stdout","created":1760776887598,"payload":{"deploymentId":"dpl_FV2SRGov8ACF4QdhQaYQxVW6eb72","info":{"type":"build","name":"bld_2i6njzo3z","entrypoint":"."},"text":"","id":"1760776887598580699845600001","date":1760776887598,"serial":"1760776887598580699845600001"}}
+,
+{"type":"stdout","created":1760776887598,"payload":{"deploymentId":"dpl_FV2SRGov8ACF4QdhQaYQxVW6eb72","info":{"type":"build","name":"bld_2i6njzo3z","entrypoint":"."},"text":"Run `npm audit` for details.","id":"1760776887598580699845600002","date":1760776887598,"serial":"1760776887598580699845600002"}}
+,
+{"type":"stdout","created":1760776887661,"payload":{"deploymentId":"dpl_FV2SRGov8ACF4QdhQaYQxVW6eb72","info":{"type":"build","name":"bld_2i6njzo3z","entrypoint":"."},"text":"Detected Next.js version: 14.0.4","id":"1760776887661580699845600000","date":1760776887661,"serial":"1760776887661580699845600000"}}
+,
+{"type":"stdout","created":1760776887663,"payload":{"deploymentId":"dpl_FV2SRGov8ACF4QdhQaYQxVW6eb72","info":{"type":"build","name":"bld_2i6njzo3z","entrypoint":"."},"text":"Running \"npm run build\"","id":"1760776887663580699845600000","date":1760776887663,"serial":"1760776887663580699845600000"}}
+,
+{"type":"stderr","created":1760776887751,"payload":{"deploymentId":"dpl_FV2SRGov8ACF4QdhQaYQxVW6eb72","info":{"type":"build","name":"bld_2i6njzo3z","entrypoint":"."},"text":"npm error config prefix cannot be changed from project config: /vercel/path0/.npmrc.","id":"1760776887751580699845600000","date":1760776887751,"serial":"1760776887751580699845600000"}}
+,
+{"type":"stdout","created":1760776887819,"payload":{"deploymentId":"dpl_FV2SRGov8ACF4QdhQaYQxVW6eb72","info":{"type":"build","name":"bld_2i6njzo3z","entrypoint":"."},"text":"","id":"1760776887819580699845600000","date":1760776887819,"serial":"1760776887819580699845600000"}}
+,
+{"type":"stdout","created":1760776887819,"payload":{"deploymentId":"dpl_FV2SRGov8ACF4QdhQaYQxVW6eb72","info":{"type":"build","name":"bld_2i6njzo3z","entrypoint":"."},"text":"> crypto-dashboard@0.1.0 build","id":"1760776887819580699845600001","date":1760776887819,"serial":"1760776887819580699845600001"}}
+,
+{"type":"stdout","created":1760776887819,"payload":{"deploymentId":"dpl_FV2SRGov8ACF4QdhQaYQxVW6eb72","info":{"type":"build","name":"bld_2i6njzo3z","entrypoint":"."},"text":"> next build","id":"1760776887819580699845600002","date":1760776887819,"serial":"1760776887819580699845600002"}}
+,
+{"type":"stdout","created":1760776887819,"payload":{"deploymentId":"dpl_FV2SRGov8ACF4QdhQaYQxVW6eb72","info":{"type":"build","name":"bld_2i6njzo3z","entrypoint":"."},"text":"","id":"1760776887819580699845600003","date":1760776887819,"serial":"1760776887819580699845600003"}}
+,
+{"type":"stdout","created":1760776888361,"payload":{"deploymentId":"dpl_FV2SRGov8ACF4QdhQaYQxVW6eb72","info":{"type":"build","name":"bld_2i6njzo3z","entrypoint":"."},"text":"Attention: Next.js now collects completely anonymous telemetry regarding usage.","id":"1760776888361580699845600000","date":1760776888361,"serial":"1760776888361580699845600000"}}
+,
+{"type":"stdout","created":1760776888362,"payload":{"deploymentId":"dpl_FV2SRGov8ACF4QdhQaYQxVW6eb72","info":{"type":"build","name":"bld_2i6njzo3z","entrypoint":"."},"text":"This information is used to shape Next.js' roadmap and prioritize features.","id":"1760776888362580699845600000","date":1760776888362,"serial":"1760776888362580699845600000"}}
+,
+{"type":"stdout","created":1760776888363,"payload":{"deploymentId":"dpl_FV2SRGov8ACF4QdhQaYQxVW6eb72","info":{"type":"build","name":"bld_2i6njzo3z","entrypoint":"."},"text":"You can learn more, including how to opt-out if you'd not like to participate in this anonymous program, by visiting the following URL:","id":"1760776888363580699845600000","date":1760776888363,"serial":"1760776888363580699845600000"}}
+,
+{"type":"stdout","created":1760776888363,"payload":{"deploymentId":"dpl_FV2SRGov8ACF4QdhQaYQxVW6eb72","info":{"type":"build","name":"bld_2i6njzo3z","entrypoint":"."},"text":"https://nextjs.org/telemetry","id":"1760776888363580699845600001","date":1760776888363,"serial":"1760776888363580699845600001"}}
+,
+{"type":"stdout","created":1760776888363,"payload":{"deploymentId":"dpl_FV2SRGov8ACF4QdhQaYQxVW6eb72","info":{"type":"build","name":"bld_2i6njzo3z","entrypoint":"."},"text":"","id":"1760776888363580699845600002","date":1760776888363,"serial":"1760776888363580699845600002"}}
+,
+{"type":"stdout","created":1760776888440,"payload":{"deploymentId":"dpl_FV2SRGov8ACF4QdhQaYQxVW6eb72","info":{"type":"build","name":"bld_2i6njzo3z","entrypoint":"."},"text":"   Linting and checking validity of types ...","id":"1760776888440580699845600000","date":1760776888440,"serial":"1760776888440580699845600000"}}
+,
+{"type":"stderr","created":1760776893025,"payload":{"deploymentId":"dpl_FV2SRGov8ACF4QdhQaYQxVW6eb72","info":{"type":"build","name":"bld_2i6njzo3z","entrypoint":"."},"text":"Failed to compile.","id":"1760776893025580699845600000","date":1760776893025,"serial":"1760776893025580699845600000"}}
+,
+{"type":"stderr","created":1760776893026,"payload":{"deploymentId":"dpl_FV2SRGov8ACF4QdhQaYQxVW6eb72","info":{"type":"build","name":"bld_2i6njzo3z","entrypoint":"."},"text":"","id":"1760776893026580699845600000","date":1760776893026,"serial":"1760776893026580699845600000"}}
+,
+{"type":"stderr","created":1760776893026,"payload":{"deploymentId":"dpl_FV2SRGov8ACF4QdhQaYQxVW6eb72","info":{"type":"build","name":"bld_2i6njzo3z","entrypoint":"."},"text":"./components/CoinCard.tsx:3:24","id":"1760776893026580699845600001","date":1760776893026,"serial":"1760776893026580699845600001"}}
+,
+{"type":"stderr","created":1760776893026,"payload":{"deploymentId":"dpl_FV2SRGov8ACF4QdhQaYQxVW6eb72","info":{"type":"build","name":"bld_2i6njzo3z","entrypoint":"."},"text":"Type error: Cannot find module 'framer-motion' or its corresponding type declarations.","id":"1760776893026580699845600002","date":1760776893026,"serial":"1760776893026580699845600002"}}
+,
+{"type":"stderr","created":1760776893026,"payload":{"deploymentId":"dpl_FV2SRGov8ACF4QdhQaYQxVW6eb72","info":{"type":"build","name":"bld_2i6njzo3z","entrypoint":"."},"text":"","id":"1760776893026580699845600003","date":1760776893026,"serial":"1760776893026580699845600003"}}
+,
+{"type":"stderr","created":1760776893026,"payload":{"deploymentId":"dpl_FV2SRGov8ACF4QdhQaYQxVW6eb72","info":{"type":"build","name":"bld_2i6njzo3z","entrypoint":"."},"text":"\u001b[0m \u001b[90m 1 |\u001b[39m \u001b[36mimport\u001b[39m \u001b[33mReact\u001b[39m \u001b[36mfrom\u001b[39m \u001b[32m'react'\u001b[39m\u001b[0m","id":"1760776893026580699845600004","date":1760776893026,"serial":"1760776893026580699845600004"}}
+,
+{"type":"stderr","created":1760776893026,"payload":{"deploymentId":"dpl_FV2SRGov8ACF4QdhQaYQxVW6eb72","info":{"type":"build","name":"bld_2i6njzo3z","entrypoint":"."},"text":"\u001b[0m \u001b[90m 2 |\u001b[39m \u001b[36mimport\u001b[39m \u001b[33mImage\u001b[39m \u001b[36mfrom\u001b[39m \u001b[32m'next/image'\u001b[39m\u001b[0m","id":"1760776893026580699845600005","date":1760776893026,"serial":"1760776893026580699845600005"}}
+,
+{"type":"stderr","created":1760776893026,"payload":{"deploymentId":"dpl_FV2SRGov8ACF4QdhQaYQxVW6eb72","info":{"type":"build","name":"bld_2i6njzo3z","entrypoint":"."},"text":"\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 3 |\u001b[39m \u001b[36mimport\u001b[39m { motion } \u001b[36mfrom\u001b[39m \u001b[32m'framer-motion'\u001b[39m\u001b[0m","id":"1760776893026580699845600006","date":1760776893026,"serial":"1760776893026580699845600006"}}
+,
+{"type":"stderr","created":1760776893026,"payload":{"deploymentId":"dpl_FV2SRGov8ACF4QdhQaYQxVW6eb72","info":{"type":"build","name":"bld_2i6njzo3z","entrypoint":"."},"text":"\u001b[0m \u001b[90m   |\u001b[39m                        \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m","id":"1760776893026580699845600007","date":1760776893026,"serial":"1760776893026580699845600007"}}
+,
+{"type":"stderr","created":1760776893027,"payload":{"deploymentId":"dpl_FV2SRGov8ACF4QdhQaYQxVW6eb72","info":{"type":"build","name":"bld_2i6njzo3z","entrypoint":"."},"text":"\u001b[0m \u001b[90m 4 |\u001b[39m \u001b[36mimport\u001b[39m { \u001b[33mTrendingUp\u001b[39m\u001b[33m,\u001b[39m \u001b[33mTrendingDown\u001b[39m } \u001b[36mfrom\u001b[39m \u001b[32m'lucide-react'\u001b[39m\u001b[0m","id":"1760776893027580699845600000","date":1760776893027,"serial":"1760776893027580699845600000"}}
+,
+{"type":"stderr","created":1760776893027,"payload":{"deploymentId":"dpl_FV2SRGov8ACF4QdhQaYQxVW6eb72","info":{"type":"build","name":"bld_2i6njzo3z","entrypoint":"."},"text":"\u001b[0m \u001b[90m 5 |\u001b[39m \u001b[36mimport\u001b[39m { \u001b[33mCard\u001b[39m } \u001b[36mfrom\u001b[39m \u001b[32m'./ui/Card'\u001b[39m\u001b[0m","id":"1760776893027580699845600001","date":1760776893027,"serial":"1760776893027580699845600001"}}
+,
+{"type":"stderr","created":1760776893027,"payload":{"deploymentId":"dpl_FV2SRGov8ACF4QdhQaYQxVW6eb72","info":{"type":"build","name":"bld_2i6njzo3z","entrypoint":"."},"text":"\u001b[0m \u001b[90m 6 |\u001b[39m \u001b[36mimport\u001b[39m { \u001b[33mCryptoCoin\u001b[39m } \u001b[36mfrom\u001b[39m \u001b[32m'@/lib/crypto-api'\u001b[39m\u001b[0m","id":"1760776893027580699845600002","date":1760776893027,"serial":"1760776893027580699845600002"}}
+,
+{"type":"stderr","created":1760776893067,"payload":{"deploymentId":"dpl_FV2SRGov8ACF4QdhQaYQxVW6eb72","info":{"type":"build","name":"bld_2i6njzo3z","entrypoint":"."},"text":"Error: Command \"npm run build\" exited with 1","id":"1760776893067580699845600000","date":1760776893067,"serial":"1760776893067580699845600000"}}
+]
