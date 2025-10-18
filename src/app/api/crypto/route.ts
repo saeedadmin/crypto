@@ -2,7 +2,7 @@ export async function GET() {
   try {
     // فعلاً با CoinGecko API کار می‌کنیم چون رایگان و آسون هست
     const response = await fetch(
-      'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,binancecoin,cardano,solana,polkadot,dogecoin,shiba-inu&vs_currencies=usd&include_24hr_change=true',
+      'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,binancecoin,cardano,solana,polkadot,dogecoin,shiba-inu,chainlink,polygon,avalanche-2,near,internet-computer,cosmos,algorand,tezos,elrond-matic,fantom,pancakeswap-token,uniswap&vs_currencies=usd&include_24hr_change=true',
       {
         headers: {
           'Accept': 'application/json',
@@ -52,6 +52,18 @@ function getCryptoName(id: string): string {
     polkadot: 'Polkadot',
     dogecoin: 'Dogecoin',
     'shiba-inu': 'Shiba Inu',
+    chainlink: 'Chainlink',
+    polygon: 'Polygon',
+    'avalanche-2': 'Avalanche',
+    near: 'NEAR Protocol',
+    'internet-computer': 'Internet Computer',
+    cosmos: 'Cosmos',
+    algorand: 'Algorand',
+    tezos: 'Tezos',
+    'elrond-matic': 'MultiversX',
+    fantom: 'Fantom',
+    'pancakeswap-token': 'PancakeSwap',
+    uniswap: 'Uniswap',
   };
   return names[id] || id;
 }
@@ -66,6 +78,18 @@ function getCryptoSymbol(id: string): string {
     polkadot: 'DOT',
     dogecoin: 'DOGE',
     'shiba-inu': 'SHIB',
+    chainlink: 'LINK',
+    polygon: 'MATIC',
+    'avalanche-2': 'AVAX',
+    near: 'NEAR',
+    'internet-computer': 'ICP',
+    cosmos: 'ATOM',
+    algorand: 'ALGO',
+    tezos: 'XTZ',
+    'elrond-matic': 'EGLD',
+    fantom: 'FTM',
+    'pancakeswap-token': 'CAKE',
+    uniswap: 'UNI',
   };
   return symbols[id] || id.toUpperCase();
 }

@@ -50,69 +50,121 @@ export default function CryptoPrices() {
     return () => clearInterval(interval);
   }, []);
 
+  const getCryptoIcon = (symbol: string): string => {
+    const icons: { [key: string]: string } = {
+      'BTC': '₿',
+      'ETH': 'Ξ',
+      'BNB': '🔸',
+      'ADA': '🔺',
+      'SOL': '◉',
+      'DOT': '●',
+      'DOGE': '🐕',
+      'SHIB': '🐶',
+      'LINK': '🔗',
+      'MATIC': '🔷',
+      'AVAX': '🔺',
+      'NEAR': '🌐',
+      'ICP': '∞',
+      'ATOM': '⚛️',
+      'ALGO': '△',
+      'XTZ': '🔷',
+      'EGLD': '⚡',
+      'FTM': '👻',
+      'CAKE': '🥞',
+      'UNI': '🦄',
+    };
+    return icons[symbol] || '💎';
+  };
+
+  const formatPrice = (price: number): string => {
+    if (price >= 1) {
+      return `$${price.toLocaleString(undefined, {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      })}`;
+    } else {
+      return `$${price.toFixed(6)}`;
+    }
+  };
+
   if (loading) {
     return (
-      <div className="text-center py-8">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500 mx-auto"></div>
-        <p className="mt-4 text-gray-600">در حال بارگذاری قیمت‌ها...</p>
+      <div className="loading-container">
+        <div className="loading-spinner"></div>
+        <p className="loading-text">در حال بارگذاری قیمت‌های ارزهای دیجیتال...</p>
       </div>
     );
   }
 
   if (error) {
     return (
-      <div className="text-center py-8">
-        <p className="text-red-500 mb-4">{error}</p>
-        <button
-          onClick={fetchCryptoData}
-          className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-colors"
-        >
-          تلاش مجدد
+      <div className="error-container">
+        <h3>⚠️ خطا در بارگذاری داده‌ها</h3>
+        <p>{error}</p>
+        <button onClick={fetchCryptoData} className="error-button">
+          🔄 تلاش مجدد
         </button>
       </div>
     );
   }
 
   return (
-    <div className="max-w-4xl mx-auto p-4">
-      <div className="bg-white rounded-lg shadow-lg overflow-hidden">
-        <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-6">
-          <h2 className="text-2xl font-bold text-center">قیمت ارزهای دیجیتال</h2>
-          <p className="text-center text-blue-100 mt-2">
-            آخرین آپدیت: {lastUpdate}
-          </p>
+    <div className="main-content">
+      <div className="container max-w-7xl mx-auto">
+        {/* Stats Section */}
+        <div className="stats-section">
+          <h2 className="stats-title">آمار بازار ارزهای دیجیتال</h2>
+          <div className="stats-grid">
+            <div className="stat-item">
+              <span className="stat-number">{cryptoData.length}</span>
+              <span className="stat-label">ارزهای نمایش داده شده</span>
+            </div>
+            <div className="stat-item">
+              <span className="stat-number">
+                {cryptoData.filter(crypto => crypto.change24h > 0).length}
+              </span>
+              <span className="stat-label">ارزهای صعودی</span>
+            </div>
+            <div className="stat-item">
+              <span className="stat-number">
+                {cryptoData.filter(crypto => crypto.change24h < 0).length}
+              </span>
+              <span className="stat-label">ارزهای نزولی</span>
+            </div>
+            <div className="stat-item">
+              <span className="stat-number">{lastUpdate}</span>
+              <span className="stat-label">آخرین بروزرسانی</span>
+            </div>
+          </div>
         </div>
-        
-        <div className="grid gap-4 p-6 md:grid-cols-2 lg:grid-cols-3">
-          {cryptoData.map((crypto) => (
+
+        {/* Crypto Cards Grid */}
+        <div className="crypto-grid">
+          {cryptoData.map((crypto, index) => (
             <div
               key={crypto.id}
-              className="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow"
+              className="crypto-card"
+              style={{
+                animationDelay: `${index * 0.1}s`
+              }}
             >
-              <div className="flex justify-between items-start mb-2">
-                <div>
-                  <h3 className="font-bold text-lg text-gray-800">{crypto.name}</h3>
-                  <p className="text-gray-500 text-sm">{crypto.symbol}</p>
+              <div className="crypto-card-header">
+                <div className="crypto-icon">
+                  {getCryptoIcon(crypto.symbol)}
                 </div>
-                <div className="text-right">
-                  <p className="text-2xl font-bold text-gray-900">
-                    ${crypto.price.toLocaleString(undefined, {
-                      minimumFractionDigits: 2,
-                      maximumFractionDigits: crypto.price > 1 ? 2 : 6
-                    })}
-                  </p>
+                <div className="crypto-info">
+                  <h3>{crypto.name}</h3>
+                  <p>{crypto.symbol}</p>
                 </div>
               </div>
               
-              <div className="flex justify-between items-center mt-4">
-                <span className="text-sm text-gray-600">تغییر 24 ساعته:</span>
-                <span
-                  className={`font-semibold text-sm px-2 py-1 rounded ${
-                    crypto.change24h >= 0
-                      ? 'text-green-700 bg-green-100'
-                      : 'text-red-700 bg-red-100'
-                  }`}
-                >
+              <div className="crypto-price">
+                {formatPrice(crypto.price)}
+              </div>
+              
+              <div className={`crypto-change ${crypto.change24h >= 0 ? 'positive' : 'negative'}`}>
+                <span>{crypto.change24h >= 0 ? '📈' : '📉'}</span>
+                <span>
                   {crypto.change24h >= 0 ? '+' : ''}
                   {crypto.change24h.toFixed(2)}%
                 </span>
@@ -121,12 +173,11 @@ export default function CryptoPrices() {
           ))}
         </div>
         
-        <div className="bg-gray-50 p-4 text-center">
-          <button
-            onClick={fetchCryptoData}
-            className="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600 transition-colors"
-          >
-            🔄 بروزرسانی قیمت‌ها
+        {/* Update Button */}
+        <div className="text-center">
+          <button onClick={fetchCryptoData} className="update-button">
+            <span>🔄</span>
+            <span>بروزرسانی قیمت‌ها</span>
           </button>
         </div>
       </div>
