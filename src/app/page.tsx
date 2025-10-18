@@ -15,6 +15,8 @@ export default function Home() {
               <li><a href="#prices" className="nav-link">Prices</a></li>
               <li><a href="#about" className="nav-link">About</a></li>
               <li><a href="#contact" className="nav-link">Contact</a></li>
+              <li><a href="/auth/login" className="nav-link auth-nav-link">Login</a></li>
+              <li><a href="/auth/signup" className="nav-link signup-nav-link">Sign Up</a></li>
             </ul>
           </div>
         </div>
