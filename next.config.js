@@ -1,8 +1,5 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  experimental: {
-    appDir: true,
-  },
   images: {
     domains: ['assets.coingecko.com', 'coin-images.coingecko.com'],
   },
@@ -12,6 +9,12 @@ const nextConfig = {
     SUPABASE_ANON_KEY: process.env.SUPABASE_ANON_KEY,
     TELEGRAM_BOT_TOKEN: process.env.TELEGRAM_BOT_TOKEN,
     NEXTAUTH_URL: process.env.NEXTAUTH_URL,
+  },
+  typescript: {
+    ignoreBuildErrors: false,
+  },
+  eslint: {
+    ignoreDuringBuilds: false,
   },
 };
 
