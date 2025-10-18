@@ -418,14 +418,17 @@ body {
   left: 0;
   right: 0;
   bottom: 0;
+  width: 100vw;
+  height: 100vh;
   background: rgba(0, 0, 0, 0.8);
   backdrop-filter: blur(10px);
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 1000;
+  z-index: 9999;
   padding: 1rem;
   animation: fadeIn 0.3s ease-out;
+  overflow-y: auto;
 }
 
 .modal-content {
@@ -845,6 +848,22 @@ body {
   margin-top: 0.5rem;
 }
 
+/* Updating indicator */
+.updating-indicator {
+  color: var(--accent-green);
+  font-size: 1.5rem;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
 /* Footer */
 .footer {
   background: var(--bg-secondary);
@@ -910,6 +929,17 @@ body {
 
 .update-button:active {
   transform: translateY(-1px);
+}
+
+.update-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.update-button:disabled:hover {
+  transform: none;
+  box-shadow: none;
 }
 
 /* Responsive Design */

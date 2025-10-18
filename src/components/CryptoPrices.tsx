@@ -38,6 +38,7 @@ export default function CryptoPrices() {
   const [cryptoData, setCryptoData] = useState<CryptoData[]>([]);
   const [filteredData, setFilteredData] = useState<CryptoData[]>([]);
   const [loading, setLoading] = useState(true);
+  const [updating, setUpdating] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [lastUpdate, setLastUpdate] = useState<string>('');
   const [selectedCrypto, setSelectedCrypto] = useState<CryptoData | null>(null);
@@ -45,9 +46,14 @@ export default function CryptoPrices() {
   const [sortDirection, setSortDirection] = useState<SortDirection>('asc');
   const [searchTerm, setSearchTerm] = useState('');
 
-  const fetchCryptoData = async () => {
+  const fetchCryptoData = async (isInitialLoad = false) => {
     try {
-      setLoading(true);
+      if (isInitialLoad) {
+        setLoading(true);
+      } else {
+        setUpdating(true);
+      }
+      
       const response = await fetch('/api/crypto');
       const result: ApiResponse = await response.json();
       
@@ -70,13 +76,17 @@ export default function CryptoPrices() {
       setError('Connection error. Please try again.');
       console.error('Error fetching crypto data:', err);
     } finally {
-      setLoading(false);
+      if (isInitialLoad) {
+        setLoading(false);
+      } else {
+        setUpdating(false);
+      }
     }
   };
 
   useEffect(() => {
-    fetchCryptoData();
-    const interval = setInterval(fetchCryptoData, 30000);
+    fetchCryptoData(true); // Initial load
+    const interval = setInterval(() => fetchCryptoData(false), 30000); // Updates every 30 seconds
     return () => clearInterval(interval);
   }, []);
 
@@ -99,6 +109,22 @@ export default function CryptoPrices() {
 
     setFilteredData(filtered);
   }, [cryptoData, sortField, sortDirection, searchTerm]);
+
+  // Handle modal body scroll lock
+  useEffect(() => {
+    if (selectedCrypto) {
+      document.body.style.overflow = 'hidden';
+      // Scroll to top when modal opens
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    
+    // Cleanup function
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [selectedCrypto]);
 
   const handleSort = (field: SortField) => {
     if (sortField === field) {
@@ -152,7 +178,7 @@ export default function CryptoPrices() {
       <div className="error-container">
         <h3>⚠️ Error Loading Data</h3>
         <p>{error}</p>
-        <button onClick={fetchCryptoData} className="error-button">
+        <button onClick={() => fetchCryptoData(true)} className="error-button">
           🔄 Try Again
         </button>
       </div>
@@ -183,7 +209,15 @@ export default function CryptoPrices() {
               <span className="stat-label">Losers (24h)</span>
             </div>
             <div className="stat-item">
-              <span className="stat-number">{lastUpdate}</span>
+              <span className="stat-number">
+                {updating ? (
+                  <span className="updating-indicator">
+                    🔄 Updating...
+                  </span>
+                ) : (
+                  lastUpdate
+                )}
+              </span>
               <span className="stat-label">Last Updated</span>
             </div>
           </div>
@@ -277,16 +311,27 @@ export default function CryptoPrices() {
         
         {/* Update Button */}
         <div className="text-center">
-          <button onClick={fetchCryptoData} className="update-button">
-            <span>🔄</span>
-            <span>Refresh Prices</span>
+          <button onClick={() => fetchCryptoData(false)} className="update-button" disabled={updating}>
+            <span>{updating ? '🔄' : '🔄'}</span>
+            <span>{updating ? 'Updating...' : 'Refresh Prices'}</span>
           </button>
         </div>
       </div>
 
       {/* Modal for detailed view */}
       {selectedCrypto && (
-        <div className="modal-overlay" onClick={() => setSelectedCrypto(null)}>
+        <div 
+          className="modal-overlay" 
+          onClick={() => setSelectedCrypto(null)}
+          style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            zIndex: 9999
+          }}
+        >
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
             <button 
               className="modal-close"
