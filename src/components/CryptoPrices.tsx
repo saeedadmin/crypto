@@ -94,7 +94,6 @@ export default function CryptoPrices() {
 
   useEffect(() => {
     let filtered = cryptoData.filter(crypto =>
-      crypto.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       crypto.symbol.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
@@ -213,19 +212,6 @@ export default function CryptoPrices() {
     });
   };
 
-  const formatLastUpdateTime = (): string => {
-    if (!lastUpdate) return 'Never updated';
-    
-    return lastUpdate.toLocaleString('en-US', {
-      month: 'short',
-      day: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit',
-      second: '2-digit',
-      hour12: true
-    });
-  };
-
   if (loading) {
     return (
       <div className="loading-container">
@@ -279,7 +265,7 @@ export default function CryptoPrices() {
                 ) : (
                   <div className="time-display">
                     <div className="last-update-time">
-                      {formatLastUpdateTime()} • {formatTimeAgo(lastUpdate)}
+                      {formatTimeAgo(lastUpdate)}
                     </div>
                     <div className="current-time">
                       Current: {formatCurrentTime()}
@@ -297,7 +283,7 @@ export default function CryptoPrices() {
           <div className="search-container">
             <input
               type="text"
-              placeholder="Search cryptocurrencies..."
+              placeholder="Search by symbol... (e.g. BTC, ETH, ADA)"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               className="search-input"
