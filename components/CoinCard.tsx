@@ -1,6 +1,5 @@
 import React from 'react'
 import Image from 'next/image'
-import { motion } from 'framer-motion'
 import { TrendingUp, TrendingDown } from 'lucide-react'
 import { Card } from './ui/Card'
 import { CryptoCoin } from '@/lib/crypto-api'
@@ -15,11 +14,7 @@ export const CoinCard: React.FC<CoinCardProps> = ({ coin, onClick, index = 0 }) 
   const isPositive = coin.price_change_percentage_24h >= 0
   
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.3, delay: index * 0.05 }}
-    >
+    <div>
       <Card hover={true} onClick={onClick} className="cursor-pointer hover:border-primary-500/50">
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-3">
@@ -117,6 +112,6 @@ export const CoinCard: React.FC<CoinCardProps> = ({ coin, onClick, index = 0 }) 
           )}
         </div>
       </Card>
-    </motion.div>
+    </div>
   )
 }
