@@ -9,6 +9,8 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   helperText?: string
 }
 
+const MotionInput = motion.input
+
 export const Input = forwardRef<HTMLInputElement, InputProps>((
   { label, error, icon: Icon, helperText, className = '', ...props },
   ref
@@ -28,7 +30,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((
           </div>
         )}
         
-        <motion.input
+        <MotionInput
           ref={ref}
           className={`
             w-full px-4 py-3 bg-gray-800 border rounded-lg transition-all duration-200 text-gray-100 placeholder-gray-400
