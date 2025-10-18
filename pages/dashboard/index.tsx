@@ -46,8 +46,7 @@ export default function DashboardPage() {
       console.error('Invalid token:', error)
       localStorage.removeItem('auth-token')
       router.push('/auth/login')
-    }
-  }, [])
+    }, [])
 
   // Fetch coins data
   useEffect(() => {
@@ -166,7 +165,7 @@ export default function DashboardPage() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Header */}
         <div 
-          className="mb-8"}}}
+          className="mb-8"}
         >
           <h1 className="text-3xl md:text-4xl font-bold text-white mb-4">
             Crypto Dashboard
@@ -178,7 +177,7 @@ export default function DashboardPage() {
 
         {/* Market Stats */}
         <div 
-          className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8"}}}
+          className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8"}
         >
           <Card>
             <div className="text-center">
@@ -221,7 +220,7 @@ export default function DashboardPage() {
 
         {/* Controls */}
         <div 
-          className="flex flex-col md:flex-row gap-4 mb-8"}}}
+          className="flex flex-col md:flex-row gap-4 mb-8"}
         >
           <div className="flex-1">
             <Input
@@ -264,7 +263,7 @@ export default function DashboardPage() {
 
         {/* Coins Grid */}
         <div 
-          className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"}}}
+          className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"}
         >
           {filteredCoins.map((coin, index) => (
             <CoinCard
@@ -278,7 +277,7 @@ export default function DashboardPage() {
 
         {filteredCoins.length === 0 && !loading && (
           <div 
-            className="text-center py-12"}}}
+            className="text-center py-12"}
           >
             <p className="text-gray-400 text-lg">
               No cryptocurrencies found matching your search.

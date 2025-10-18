@@ -47,7 +47,7 @@ export const Button: React.FC<ButtonProps> = ({
         ${sizes[size]}
         ${disabled || loading ? disabledClasses : 'transform hover:scale-105 active:scale-95'}
         ${className}
-      `} : {}} : {}}
+      `}
     >
       {loading ? (
         <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white" />

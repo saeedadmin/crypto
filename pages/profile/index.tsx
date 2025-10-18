@@ -34,8 +34,7 @@ export default function ProfilePage() {
       
       if (userData.telegram_id) {
         setTelegramId(userData.telegram_id)
-      }
-    } catch (error) {
+      } catch (error) {
       console.error('Invalid token:', error)
       localStorage.removeItem('auth-token')
       router.push('/auth/login')
@@ -115,7 +114,7 @@ export default function ProfilePage() {
       <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Header */}
         <div 
-          className="mb-8"}}}
+          className="mb-8"}
         >
           <h1 className="text-3xl md:text-4xl font-bold text-white mb-2">
             Profile Settings
@@ -127,7 +126,7 @@ export default function ProfilePage() {
 
         {/* Account Info */}
         <div 
-          className="mb-6"}}}
+          className="mb-6"}
         >
           <Card>
             <h2 className="text-xl font-semibold text-white mb-4 flex items-center space-x-2">
@@ -171,7 +170,7 @@ export default function ProfilePage() {
 
         {/* Telegram Setup */}
         <div 
-          className="mb-6"}}}
+          className="mb-6"}
         >
           <Card>
             <h2 className="text-xl font-semibold text-white mb-4 flex items-center space-x-2">
@@ -282,7 +281,7 @@ export default function ProfilePage() {
         </div>
 
         {/* Instructions */}
-        <div}}}
+        <div
         >
           <Card>
             <h2 className="text-xl font-semibold text-white mb-4">

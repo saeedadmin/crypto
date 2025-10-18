@@ -21,8 +21,7 @@ export default function LoginPage() {
   const {
     register,
     handleSubmit,
-    formState: { errors }
-  } = useForm<LoginForm>()
+    formState: { errors } = useForm<LoginForm>()
 
   const onSubmit = async (data: LoginForm) => {
     setLoading(true)
@@ -60,7 +59,7 @@ export default function LoginPage() {
       <div className="max-w-md w-full space-y-8">
         {/* Header */}
         <div 
-          className="text-center"}}}
+          className="text-center"}
         >
           <Link href="/" className="flex items-center justify-center space-x-2 mb-6">
             <TrendingUp className="h-10 w-10 text-primary-500" />
@@ -76,12 +75,12 @@ export default function LoginPage() {
         </div>
 
         {/* Login Form */}
-        <div}}}
+        <div
         >
           <Card>
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
               {error && (
-                <div}}
+                <div
                   className="bg-red-900/20 border border-red-500/50 rounded-lg p-4"
                 >
                   <p className="text-red-400 text-sm">{error}</p>
@@ -138,7 +137,7 @@ export default function LoginPage() {
 
         {/* Footer */}
         <div 
-          className="text-center"}}}
+          className="text-center"}
         >
           <p className="text-gray-400">
             Don’t have an account?{' '}

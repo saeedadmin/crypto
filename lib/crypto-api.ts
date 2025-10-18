@@ -50,8 +50,7 @@ export const cryptoAPI = {
     } catch (error) {
       console.error('Error fetching top coins:', error)
       throw error
-    }
-  },
+    },
 
   async getCoinById(coinId: string): Promise<CryptoCoin> {
     try {
@@ -159,5 +158,3 @@ export const cryptoAPI = {
     } else {
       return `$${marketCap.toLocaleString()}`
     }
-  }
-}

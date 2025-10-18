@@ -32,8 +32,7 @@ export default function AlertsPage() {
       console.error('Invalid token:', error)
       localStorage.removeItem('auth-token')
       router.push('/auth/login')
-    }
-  }, [])
+    }, [])
 
   useEffect(() => {
     if (user) {
@@ -149,7 +148,7 @@ export default function AlertsPage() {
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Header */}
         <div 
-          className="flex justify-between items-center mb-8"}}}
+          className="flex justify-between items-center mb-8"}
         >
           <div>
             <h1 className="text-3xl md:text-4xl font-bold text-white mb-2">
@@ -172,7 +171,7 @@ export default function AlertsPage() {
         {/* Telegram Warning */}
         {user && !user.telegram_verified && (
           <div 
-            className="mb-6"}}}
+            className="mb-6"}
           >
             <Card className="border-yellow-500/50 bg-yellow-900/20">
               <div className="flex items-center space-x-3">
@@ -199,7 +198,7 @@ export default function AlertsPage() {
 
         {/* Alerts List */}
         <div 
-          className="space-y-4"}}}
+          className="space-y-4"}
         >
           {alerts.length === 0 ? (
             <Card>
@@ -222,7 +221,7 @@ export default function AlertsPage() {
           ) : (
             alerts.map((alert, index) => (
               <div
-                key={alert.id}}}}
+                key={alert.id}
               >
                 <Card className={`${
                   alert.is_active ? 'border-gray-700' : 'border-gray-800 opacity-75'

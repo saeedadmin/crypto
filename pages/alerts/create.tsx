@@ -31,8 +31,7 @@ export default function CreateAlertPage() {
     handleSubmit,
     watch,
     setValue,
-    formState: { errors }
-  } = useForm<AlertForm>({
+    formState: { errors } = useForm<AlertForm>({
     defaultValues: {
       coin_id: coin as string || '',
       coin_name: name as string || '',
@@ -154,7 +153,7 @@ export default function CreateAlertPage() {
       <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Header */}
         <div 
-          className="mb-8"}}}
+          className="mb-8"}
         >
           <button
             onClick={() => router.back()}
@@ -175,7 +174,7 @@ export default function CreateAlertPage() {
         {/* Current Price Info */}
         {coin && currentPrice && (
           <div 
-            className="mb-6"}}}
+            className="mb-6"}
           >
             <Card className="bg-primary-900/20 border-primary-500/50">
               <div className="flex items-center justify-between">
@@ -199,12 +198,12 @@ export default function CreateAlertPage() {
         )}
 
         {/* Alert Form */}
-        <div}}}
+        <div
         >
           <Card>
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
               {error && (
-                <div}}
+                <div
                   className="bg-red-900/20 border border-red-500/50 rounded-lg p-4"
                 >
                   <p className="text-red-400 text-sm">{error}</p>

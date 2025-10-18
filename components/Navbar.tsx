@@ -46,7 +46,7 @@ export const Navbar: React.FC<NavbarProps> = ({ user, onLogout }) => {
           {/* Logo */}
           <div className="flex items-center">
             <Link href={user ? '/dashboard' : '/'} className="flex items-center space-x-2">
-              <div}}
+              <div
                 className="flex items-center space-x-2"
               >
                 <TrendingUp className="h-8 w-8 text-primary-500" />
@@ -138,7 +138,7 @@ export const Navbar: React.FC<NavbarProps> = ({ user, onLogout }) => {
       {/* Mobile Navigation */}
       
         {isMobileMenuOpen && user && (
-          <div}}}
+          <div
             className="md:hidden bg-gray-900 border-t border-gray-800"
           >
             <div className="px-2 pt-2 pb-3 space-y-1">

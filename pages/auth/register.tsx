@@ -24,8 +24,7 @@ export default function RegisterPage() {
     register,
     handleSubmit,
     watch,
-    formState: { errors }
-  } = useForm<RegisterForm>()
+    formState: { errors } = useForm<RegisterForm>()
   
   const password = watch('password')
 
@@ -65,7 +64,7 @@ export default function RegisterPage() {
       <div className="max-w-md w-full space-y-8">
         {/* Header */}
         <div 
-          className="text-center"}}}
+          className="text-center"}
         >
           <Link href="/" className="flex items-center justify-center space-x-2 mb-6">
             <TrendingUp className="h-10 w-10 text-primary-500" />
@@ -81,12 +80,12 @@ export default function RegisterPage() {
         </div>
 
         {/* Register Form */}
-        <div}}}
+        <div
         >
           <Card>
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
               {error && (
-                <div}}
+                <div
                   className="bg-red-900/20 border border-red-500/50 rounded-lg p-4"
                 >
                   <p className="text-red-400 text-sm">{error}</p>
@@ -185,7 +184,7 @@ export default function RegisterPage() {
 
         {/* Footer */}
         <div 
-          className="text-center"}}}
+          className="text-center"}
         >
           <p className="text-gray-400">
             Already have an account?{' '}

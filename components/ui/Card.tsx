@@ -19,7 +19,8 @@ export const Card: React.FC<CardProps> = ({
   return (
     <div
       className={`${baseClasses} ${hoverClasses} ${className}`}
-      onClick={onClick}}}} : {}}
+      onClick={onClick}
+    >
     >
       {children}
     </div>

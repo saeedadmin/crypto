@@ -57,14 +57,14 @@ export default function HomePage() {
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <h1 
-              className="text-5xl md:text-7xl font-bold text-white mb-6"}}}
+              className="text-5xl md:text-7xl font-bold text-white mb-6"}
             >
               Track Crypto.
               <span className="text-gradient block">Stay Ahead.</span>
             </h1>
             
             <p 
-              className="text-xl text-gray-400 mb-10 max-w-3xl mx-auto"}}}
+              className="text-xl text-gray-400 mb-10 max-w-3xl mx-auto"}
             >
               Monitor cryptocurrency prices in real-time, set intelligent alerts, 
               and never miss important market movements. Get instant notifications 
@@ -72,7 +72,7 @@ export default function HomePage() {
             </p>
             
             <div 
-              className="flex flex-col sm:flex-row gap-4 justify-center"}}}
+              className="flex flex-col sm:flex-row gap-4 justify-center"}
             >
               <Link href="/auth/register">
                 <Button size="lg" className="min-w-[200px]">
@@ -97,7 +97,7 @@ export default function HomePage() {
             {stats.map((stat, index) => (
               <div
                 key={stat.label}
-                className="text-center"}}}
+                className="text-center"}
               >
                 <div className="text-3xl md:text-4xl font-bold text-gradient mb-2">
                   {stat.value}
@@ -116,13 +116,13 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 
-              className="text-4xl md:text-5xl font-bold text-white mb-6"}}}
+              className="text-4xl md:text-5xl font-bold text-white mb-6"}
             >
               Why Choose CryptoWatch?
             </h2>
             
             <p 
-              className="text-xl text-gray-400 max-w-3xl mx-auto"}}}
+              className="text-xl text-gray-400 max-w-3xl mx-auto"}
             >
               Discover the features that make CryptoWatch the best choice 
               for cryptocurrency tracking and alerts.
@@ -135,7 +135,7 @@ export default function HomePage() {
               
               return (
                 <div
-                  key={feature.title}}}}
+                  key={feature.title}
                 >
                   <Card className="h-full hover:border-primary-500/50 transition-all duration-300">
                     <div className="flex items-center space-x-4 mb-4">
@@ -162,19 +162,19 @@ export default function HomePage() {
       <section className="py-20 bg-gradient-to-r from-primary-900/20 to-secondary-900/20">
         <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
           <h2 
-            className="text-4xl md:text-5xl font-bold text-white mb-6"}}}
+            className="text-4xl md:text-5xl font-bold text-white mb-6"}
           >
             Ready to Get Started?
           </h2>
           
           <p 
-            className="text-xl text-gray-400 mb-10"}}}
+            className="text-xl text-gray-400 mb-10"}
           >
             Join thousands of users who trust CryptoWatch for their 
             cryptocurrency tracking needs. Start for free today!
           </p>
           
-          <div}}}
+          <div
           >
             <Link href="/auth/register">
               <Button size="lg" className="min-w-[200px]">
