@@ -2,13 +2,13 @@ import type { Metadata } from 'next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: '🤖 CryptoBot - ربات ارز دیجیتال',
-  description: 'دنبال کردن قیمت‌های آنلاین ارزهای دیجیتال با بهترین نرخ‌ها و تحلیل‌های زنده. Bitcoin, Ethereum, BNB و ارزهای محبوب دیگر',
-  keywords: 'ارز دیجیتال, بیت کوین, اتریوم, قیمت ارز, کریپتو, بلاک چین',
-  authors: [{ name: 'MiniMax Agent' }],
+  title: '🤖 CryptoBot - Cryptocurrency Price Tracker',
+  description: 'Track real-time cryptocurrency prices with the best rates and live analysis. Bitcoin, Ethereum, BNB and other popular cryptocurrencies',
+  keywords: 'cryptocurrency, bitcoin, ethereum, crypto prices, blockchain, market cap, trading',
+  authors: [{ name: 'Saeed Mohammadi' }],
   openGraph: {
-    title: '🤖 CryptoBot - ربات ارز دیجیتال',
-    description: 'دنبال کردن قیمت‌های آنلاین ارزهای دیجیتال',
+    title: '🤖 CryptoBot - Cryptocurrency Price Tracker',
+    description: 'Track real-time cryptocurrency prices with live analysis',
     type: 'website',
   }
 }
@@ -19,7 +19,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="fa" dir="rtl">
+    <html lang="en" dir="ltr">
       <body>{children}</body>
     </html>
   )
