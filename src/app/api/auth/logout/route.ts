@@ -1,6 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { withAuth, AuthenticatedRequest } from '../lib/middleware'
 
+// Force dynamic rendering for this route
+export const dynamic = 'force-dynamic'
+
 async function logoutHandler(request: AuthenticatedRequest): Promise<NextResponse> {
   try {
     // In JWT-based auth, logout is handled on client side

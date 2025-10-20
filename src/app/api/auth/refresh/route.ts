@@ -3,6 +3,9 @@ import { withAuth, AuthenticatedRequest } from '../lib/middleware'
 import { refreshToken } from '../lib/jwt'
 import { extractTokenFromHeader } from '../lib/jwt'
 
+// Force dynamic rendering for this route
+export const dynamic = 'force-dynamic'
+
 async function refreshHandler(request: AuthenticatedRequest): Promise<NextResponse> {
   try {
     // Extract the current token from header

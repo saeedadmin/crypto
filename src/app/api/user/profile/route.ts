@@ -2,6 +2,9 @@ import { NextResponse } from 'next/server'
 import { supabaseAdmin } from '../../auth/lib/supabase'
 import { withAuth, AuthenticatedRequest } from '../../auth/lib/middleware'
 
+// Force dynamic rendering for this route
+export const dynamic = 'force-dynamic'
+
 async function profileHandler(request: AuthenticatedRequest): Promise<NextResponse> {
   try {
     const userId = request.user.userId
