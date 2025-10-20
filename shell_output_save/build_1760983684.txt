@@ -1,0 +1,57 @@
+
+> simple-crypto-bot@0.1.0 build
+> next build
+
+  ▲ Next.js 14.2.33
+  - Environments: .env.local
+
+   Creating an optimized production build ...
+ ✓ Compiled successfully
+   Linting and checking validity of types     ✓ Linting and checking validity of types 
+⚠️  Node.js 18 and below are deprecated and will no longer be supported in future versions of @supabase/supabase-js. Please upgrade to Node.js 20 or later. For more information, visit: https://github.com/orgs/supabase/discussions/37217
+⚠️  Node.js 18 and below are deprecated and will no longer be supported in future versions of @supabase/supabase-js. Please upgrade to Node.js 20 or later. For more information, visit: https://github.com/orgs/supabase/discussions/37217
+⚠️  Node.js 18 and below are deprecated and will no longer be supported in future versions of @supabase/supabase-js. Please upgrade to Node.js 20 or later. For more information, visit: https://github.com/orgs/supabase/discussions/37217
+   Collecting page data     ✓ Collecting page data 
+⚠️  Node.js 18 and below are deprecated and will no longer be supported in future versions of @supabase/supabase-js. Please upgrade to Node.js 20 or later. For more information, visit: https://github.com/orgs/supabase/discussions/37217
+Auth middleware error: B [Error]: Dynamic server usage: Route /api/user/profile couldn't be rendered statically because it used `request.headers`. See more info here: https://nextjs.org/docs/messages/dynamic-server-error
+    at V (/workspace/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:21778)
+    at Object.get (/workspace/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:29465)
+    at n (/workspace/.next/server/app/api/user/profile/route.js:1:2621)
+    at /workspace/.next/server/app/api/user/profile/route.js:1:3212
+    at /workspace/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:38417
+    at /workspace/node_modules/next/dist/server/lib/trace/tracer.js:140:36
+    at NoopContextManager.with (/workspace/node_modules/next/dist/compiled/@opentelemetry/api/index.js:1:7062)
+    at ContextAPI.with (/workspace/node_modules/next/dist/compiled/@opentelemetry/api/index.js:1:518)
+    at NoopTracer.startActiveSpan (/workspace/node_modules/next/dist/compiled/@opentelemetry/api/index.js:1:18093)
+    at ProxyTracer.startActiveSpan (/workspace/node_modules/next/dist/compiled/@opentelemetry/api/index.js:1:18854) {
+  description: "Route /api/user/profile couldn't be rendered statically because it used `request.headers`. See more info here: https://nextjs.org/docs/messages/dynamic-server-error",
+  digest: 'DYNAMIC_SERVER_USAGE'
+}
+⚠️  Node.js 18 and below are deprecated and will no longer be supported in future versions of @supabase/supabase-js. Please upgrade to Node.js 20 or later. For more information, visit: https://github.com/orgs/supabase/discussions/37217
+⚠️  Node.js 18 and below are deprecated and will no longer be supported in future versions of @supabase/supabase-js. Please upgrade to Node.js 20 or later. For more information, visit: https://github.com/orgs/supabase/discussions/37217
+ ✓ Generating static pages (14/14)
+   Collecting build traces     ✓ Collecting build traces 
+   Finalizing page optimization     ✓ Finalizing page optimization 
+
+Route (app)                              Size     First Load JS
+┌ ○ /                                    2.8 kB         90.1 kB
+├ ○ /_not-found                          875 B          88.1 kB
+├ ƒ /api/auth/login                      0 B                0 B
+├ ƒ /api/auth/logout                     0 B                0 B
+├ ƒ /api/auth/refresh                    0 B                0 B
+├ ƒ /api/auth/signup                     0 B                0 B
+├ ○ /api/crypto                          0 B                0 B
+├ ○ /api/hello                           0 B                0 B
+├ ƒ /api/user/profile                    0 B                0 B
+├ ○ /auth/forgot-password                1.14 kB        97.1 kB
+├ ○ /auth/login                          2.03 kB          98 kB
+└ ○ /auth/signup                         2.43 kB        98.4 kB
++ First Load JS shared by all            87.3 kB
+  ├ chunks/117-b06ad745578f0d64.js       31.7 kB
+  ├ chunks/fd9d1056-9f91b5e418130764.js  53.7 kB
+  └ other shared chunks (total)          1.88 kB
+
+
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
+

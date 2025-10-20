@@ -8,11 +8,15 @@ export interface JWTPayload {
   exp?: number
 }
 
-const JWT_SECRET = process.env.JWT_SECRET as string
-
-if (!JWT_SECRET) {
-  throw new Error('JWT_SECRET environment variable is not set')
+function getJWTSecret(): string {
+  const secret = process.env.JWT_SECRET;
+  if (!secret) {
+    throw new Error('JWT_SECRET environment variable is not set');
+  }
+  return secret;
 }
+
+const JWT_SECRET = getJWTSecret();
 
 /**
  * Generate JWT token for user
@@ -30,7 +34,7 @@ export function generateToken(user: User, expiresIn: string = '7d'): string {
     expiresIn,
     issuer: 'crypto-app',
     audience: 'crypto-app-users'
-  })
+  } as jwt.SignOptions)
 }
 
 /**
@@ -89,5 +93,5 @@ export function refreshToken(token: string, expiresIn: string = '7d'): string | 
     expiresIn,
     issuer: 'crypto-app',
     audience: 'crypto-app-users'
-  })
+  } as jwt.SignOptions)
 }
