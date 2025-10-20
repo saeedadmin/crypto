@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { supabaseAdmin } from '../lib/supabase'
 import { verifyPassword, validateEmail } from '../lib/auth-utils'
 import { LoginData } from '../lib/auth'
+import { generateToken } from '../lib/jwt'
 
 export async function POST(request: NextRequest) {
   try {
@@ -50,6 +51,9 @@ export async function POST(request: NextRequest) {
     // Remove password_hash from response
     const { password_hash, ...userWithoutPassword } = user
 
+    // Generate JWT token
+    const token = generateToken(userWithoutPassword)
+
     // Update last login (optional)
     await supabaseAdmin
       .from('users')
@@ -59,7 +63,8 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({
       success: true,
       message: 'Login successful',
-      user: userWithoutPassword
+      user: userWithoutPassword,
+      token
     })
 
   } catch (error) {
