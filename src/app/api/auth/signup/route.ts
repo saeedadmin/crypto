@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { supabaseAdmin } from '../../../../lib/supabase'
-import { hashPassword, validateEmail, validatePassword } from '../../../../lib/auth-utils'
-import { SignupData } from '../../../../types/auth'
+import { supabaseAdmin } from '@/lib/supabase'
+import { hashPassword, validateEmail, validatePassword } from '@/lib/auth-utils'
+import { SignupData } from '@/types/auth'
 
 export async function POST(request: NextRequest) {
   try {
