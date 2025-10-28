@@ -15,7 +15,9 @@ export function validateEmail(email: string): boolean {
 }
 
 export function validatePassword(password: string): boolean {
-  // At least 8 characters, one uppercase, one lowercase, one number
-  const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d@$!%*?&]{8,}$/
-  return passwordRegex.test(password)
+  // At least 6 characters (simplified)
+  if (password.length < 6) {
+    return false
+  }
+  return true
 }

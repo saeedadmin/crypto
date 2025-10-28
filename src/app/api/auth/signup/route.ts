@@ -27,7 +27,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json(
         { 
           success: false, 
-          message: 'Password must be at least 8 characters and include uppercase, lowercase and numbers' 
+          message: 'Password must be at least 6 characters' 
         },
         { status: 400 }
       )

@@ -38,8 +38,8 @@ export default function SignupPage() {
       setError('Please enter your email address');
       return false;
     }
-    if (formData.password.length < 8) {
-      setError('Password must be at least 8 characters long');
+    if (formData.password.length < 6) {
+      setError('Password must be at least 6 characters long');
       return false;
     }
     if (formData.password !== formData.confirmPassword) {
@@ -218,10 +218,7 @@ export default function SignupPage() {
                   onChange={(e) => setAcceptTerms(e.target.checked)}
                 />
                 <span className="checkbox-checkmark"></span>
-                I agree to the{' '}
-                <Link href="/terms" className="terms-link">Terms of Service</Link>
-                {' '}and{' '}
-                <Link href="/privacy" className="terms-link">Privacy Policy</Link>
+                I agree to the Terms of Service and Privacy Policy
               </label>
             </div>
 
