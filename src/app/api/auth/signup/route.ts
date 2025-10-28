@@ -6,12 +6,12 @@ import { SignupData } from '../lib/auth'
 export async function POST(request: NextRequest) {
   try {
     const body: SignupData = await request.json()
-    const { email, password } = body
+    const { firstName, lastName, email, password } = body
 
     // Validation
-    if (!email || !password) {
+    if (!firstName || !lastName || !email || !password) {
       return NextResponse.json(
-        { success: false, message: 'Email and password are required' },
+        { success: false, message: 'All fields are required' },
         { status: 400 }
       )
     }
@@ -32,6 +32,8 @@ export async function POST(request: NextRequest) {
         { status: 400 }
       )
     }
+
+    const fullName = `${firstName} ${lastName}`
 
     // Check if user already exists
     const { data: existingUser } = await supabaseAdmin
@@ -55,11 +57,12 @@ export async function POST(request: NextRequest) {
       .from('users')
       .insert([
         {
+          name: fullName,
           email,
-          password_hash: passwordHash,
+          password: passwordHash,
         }
       ])
-      .select('id, email, created_at, updated_at')
+      .select('id, name, email, created_at, updated_at')
       .single()
 
     if (error) {

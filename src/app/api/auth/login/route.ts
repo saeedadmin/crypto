@@ -27,7 +27,7 @@ export async function POST(request: NextRequest) {
     // Find user by email
     const { data: user, error: userError } = await supabaseAdmin
       .from('users')
-      .select('id, email, password_hash, created_at, updated_at')
+      .select('id, name, email, password, created_at, updated_at')
       .eq('email', email)
       .single()
 
@@ -39,7 +39,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Verify password
-    const isPasswordValid = await verifyPassword(password, user.password_hash)
+    const isPasswordValid = await verifyPassword(password, user.password)
 
     if (!isPasswordValid) {
       return NextResponse.json(
@@ -48,8 +48,8 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // Remove password_hash from response
-    const { password_hash, ...userWithoutPassword } = user
+    // Remove password from response
+    const { password: userPassword, ...userWithoutPassword } = user
 
     // Generate JWT token
     const token = generateToken(userWithoutPassword)
@@ -63,7 +63,10 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({
       success: true,
       message: 'Login successful',
-      user: userWithoutPassword,
+      user: {
+        ...userWithoutPassword,
+        name: user.name
+      },
       token
     })
 
