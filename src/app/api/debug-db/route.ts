@@ -6,9 +6,9 @@ export async function GET() {
     // Check if table exists and test connection
     console.log('Testing Supabase connection...')
     
-    const { data, error } = await supabaseAdmin
+    const { data, error, count } = await supabaseAdmin
       .from('users')
-      .select('count(*)', { count: 'exact', head: true })
+      .select('*', { count: 'exact', head: true })
 
     if (error) {
       console.error('Database error details:', {
@@ -29,7 +29,7 @@ export async function GET() {
     return NextResponse.json({
       success: true,
       message: 'Database connection successful',
-      userCount: data?.[0]?.count || 0,
+      userCount: count || 0,
       timestamp: new Date().toISOString()
     })
 

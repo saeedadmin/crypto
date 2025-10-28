@@ -32,7 +32,7 @@ export default function DashboardPage() {
         {/* Header */}
         <div className="dashboard-header">
           <h1 className="dashboard-title">Dashboard</h1>
-          <p className="dashboard-subtitle">Welcome back, {user?.name}!</p>
+          <p className="dashboard-subtitle">Welcome back, {user?.email}!</p>
         </div>
 
         {/* Navigation Tabs */}
@@ -63,10 +63,6 @@ export default function DashboardPage() {
             <div className="dashboard-section">
               <h2 className="section-title">Profile Information</h2>
               <div className="profile-card">
-                <div className="profile-field">
-                  <label>Name:</label>
-                  <span>{user?.name}</span>
-                </div>
                 <div className="profile-field">
                   <label>Email:</label>
                   <span>{user?.email}</span>

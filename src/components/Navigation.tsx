@@ -47,7 +47,7 @@ export default function Navigation() {
             {isAuthenticated ? (
               <>
                 <li className="user-info">
-                  <span className="user-greeting">Hello, {user?.name}</span>
+                  <span className="user-greeting">Hello, {user?.email}</span>
                 </li>
                 <li>
                   <Link href="/dashboard" className="nav-link profile-nav-link">

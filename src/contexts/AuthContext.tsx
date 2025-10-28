@@ -5,7 +5,6 @@ import React, { createContext, useContext, useEffect, useState } from 'react';
 interface User {
   id: string;
   email: string;
-  name: string;
 }
 
 interface AuthContextType {
@@ -63,7 +62,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         setUser({
           id: data.user.id,
           email: data.user.email,
-          name: data.user.name,
         });
       } else {
         // Invalid token, remove it
@@ -94,7 +92,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         setUser({
           id: data.user.id,
           email: data.user.email,
-          name: data.user.name,
         });
         return true;
       } else {
@@ -158,7 +155,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         setUser({
           id: data.user.id,
           email: data.user.email,
-          name: data.user.name,
         });
         return true;
       }

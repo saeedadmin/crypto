@@ -33,8 +33,6 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    const fullName = `${firstName} ${lastName}`
-
     // Check if user already exists
     const { data: existingUser } = await supabaseAdmin
       .from('users')
@@ -52,17 +50,16 @@ export async function POST(request: NextRequest) {
     // Hash password
     const passwordHash = await hashPassword(password)
 
-    // Insert user
+    // Insert user (without name field since it's not in your schema)
     const { data: newUser, error } = await supabaseAdmin
       .from('users')
       .insert([
         {
-          name: fullName,
           email,
-          password: passwordHash,
+          password_hash: passwordHash,
         }
       ])
-      .select('id, name, email, created_at, updated_at')
+      .select('id, email, created_at, updated_at')
       .single()
 
     if (error) {
