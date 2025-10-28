@@ -1823,4 +1823,3 @@ input:checked + .toggle-slider:before {
   background: #dc2626;
   transform: translateY(-1px);
 }
-}
