@@ -66,9 +66,14 @@ export async function POST(request: NextRequest) {
       .single()
 
     if (error) {
-      console.error('Supabase error:', error)
+      console.error('Supabase signup error:', error)
       return NextResponse.json(
-        { success: false, message: 'Error creating user account' },
+        { 
+          success: false, 
+          message: 'Error creating user account',
+          details: error.message,
+          error: error
+        },
         { status: 500 }
       )
     }
