@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import './globals.css'
+import { AuthProvider } from '@/contexts/AuthContext'
 
 export const metadata: Metadata = {
   title: '🤖 CryptoBot - Cryptocurrency Price Tracker',
@@ -20,7 +21,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" dir="ltr">
-      <body>{children}</body>
+      <body>
+        <AuthProvider>
+          {children}
+        </AuthProvider>
+      </body>
     </html>
   )
 }

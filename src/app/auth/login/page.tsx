@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { useAuth } from '@/contexts/AuthContext';
 
 export default function LoginPage() {
   const [formData, setFormData] = useState({
@@ -11,6 +12,7 @@ export default function LoginPage() {
   });
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
+  const { login } = useAuth();
   const router = useRouter();
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -29,24 +31,37 @@ export default function LoginPage() {
     setError('');
 
     try {
-      // TODO: Implement login logic here
-      console.log('Login attempt:', formData);
+      // Call login API
+      const success = await login(formData.email, formData.password);
       
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
-      // For now, just redirect to home
-      router.push('/');
+      if (success) {
+        // Redirect to home page after successful login
+        router.push('/');
+      } else {
+        setError('Invalid email or password. Please try again.');
+      }
     } catch (err) {
-      setError('Invalid email or password. Please try again.');
+      setError('Login failed. Please try again.');
     } finally {
       setIsLoading(false);
     }
   };
 
   return (
-    <div className="auth-container">
-      <div className="auth-background">
+    <div className="min-h-screen">
+      {/* Simple Navigation for Auth Pages */}
+      <nav className="nav">
+        <div className="container">
+          <div className="nav-content">
+            <Link href="/" className="nav-brand">
+              🤖 CryptoBot
+            </Link>
+          </div>
+        </div>
+      </nav>
+
+      <div className="auth-container">
+        <div className="auth-background">
         <div className="auth-card">
           {/* Header */}
           <div className="auth-header">
@@ -170,6 +185,7 @@ export default function LoginPage() {
           <div className="bg-circle bg-circle-3"></div>
         </div>
       </div>
+    </div>
     </div>
   );
 }

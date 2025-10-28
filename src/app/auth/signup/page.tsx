@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { useAuth } from '@/contexts/AuthContext';
 
 export default function SignupPage() {
   const [formData, setFormData] = useState({
@@ -15,6 +16,7 @@ export default function SignupPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
   const [acceptTerms, setAcceptTerms] = useState(false);
+  const { signup } = useAuth();
   const router = useRouter();
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -60,14 +62,20 @@ export default function SignupPage() {
     setError('');
 
     try {
-      // TODO: Implement signup logic here
-      console.log('Signup attempt:', formData);
+      // Call signup API
+      const success = await signup(
+        formData.firstName,
+        formData.lastName,
+        formData.email,
+        formData.password
+      );
       
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1500));
-      
-      // For now, just redirect to login
-      router.push('/auth/login');
+      if (success) {
+        // Redirect to home page after successful signup
+        router.push('/');
+      } else {
+        setError('Failed to create account. Email might already be in use.');
+      }
     } catch (err) {
       setError('Failed to create account. Please try again.');
     } finally {
@@ -76,7 +84,18 @@ export default function SignupPage() {
   };
 
   return (
-    <div className="auth-container">
+    <div className="min-h-screen">
+      {/* Simple Navigation for Auth Pages */}
+      <nav className="nav">
+        <div className="container">
+          <div className="nav-content">
+            <Link href="/" className="nav-brand">
+              🤖 CryptoBot
+            </Link>
+          </div>
+        </div>
+      </nav>
+
       <div className="auth-background">
         <div className="auth-card signup-card">
           {/* Header */}

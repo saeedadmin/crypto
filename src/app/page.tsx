@@ -1,26 +1,11 @@
 import CryptoPrices from '@/components/CryptoPrices';
+import Navigation from '@/components/Navigation';
 
 export default function Home() {
   return (
     <main className="min-h-screen">
       {/* Navigation */}
-      <nav className="nav">
-        <div className="container">
-          <div className="nav-content">
-            <a href="/" className="nav-brand">
-              🤖 CryptoBot
-            </a>
-            <ul className="nav-links">
-              <li><a href="/" className="nav-link">Home</a></li>
-              <li><a href="#prices" className="nav-link">Prices</a></li>
-              <li><a href="#about" className="nav-link">About</a></li>
-              <li><a href="#contact" className="nav-link">Contact</a></li>
-              <li><a href="/auth/login" className="nav-link auth-nav-link">Login</a></li>
-              <li><a href="/auth/signup" className="nav-link signup-nav-link">Sign Up</a></li>
-            </ul>
-          </div>
-        </div>
-      </nav>
+      <Navigation />
 
       {/* Hero Header */}
       <header className="header">
