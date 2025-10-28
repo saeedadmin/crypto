@@ -34,13 +34,30 @@ export async function POST(request: NextRequest) {
     }
 
     // Check if user already exists
-    const { data: existingUser } = await supabaseAdmin
+    console.log('Checking if user exists with email:', email)
+    const { data: existingUser, error: checkError } = await supabaseAdmin
       .from('users')
       .select('email')
       .eq('email', email)
       .single()
 
+    console.log('Existing user check result:', { existingUser, checkError })
+
+    if (checkError) {
+      console.error('Error checking existing user:', checkError)
+      return NextResponse.json(
+        { 
+          success: false, 
+          message: 'Error checking user existence',
+          details: checkError.message,
+          error: checkError
+        },
+        { status: 500 }
+      )
+    }
+
     if (existingUser) {
+      console.log('User already exists, returning error')
       return NextResponse.json(
         { success: false, message: 'User with this email already exists' },
         { status: 409 }
@@ -49,8 +66,10 @@ export async function POST(request: NextRequest) {
 
     // Hash password
     const passwordHash = await hashPassword(password)
+    console.log('Password hashed successfully')
 
     // Insert user (without name field since it's not in your schema)
+    console.log('Attempting to insert user with email:', email)
     const { data: newUser, error } = await supabaseAdmin
       .from('users')
       .insert([
@@ -61,6 +80,8 @@ export async function POST(request: NextRequest) {
       ])
       .select('id, email, created_at, updated_at')
       .single()
+
+    console.log('Insert result:', { newUser, error })
 
     if (error) {
       console.error('Supabase signup error:', error)
