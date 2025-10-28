@@ -5,6 +5,27 @@ import { SignupData } from '../lib/auth'
 
 export async function POST(request: NextRequest) {
   try {
+    // First, test basic database connectivity
+    console.log('Testing database connection...')
+    try {
+      const { data: testData, error: testError } = await supabaseAdmin
+        .from('users')
+        .select('id')
+        .limit(1)
+      
+      console.log('DB connection test:', { testData, testError })
+    } catch (dbTestError) {
+      console.error('Database connection failed:', dbTestError)
+      return NextResponse.json(
+        { 
+          success: false, 
+          message: 'Database connection failed',
+          details: dbTestError instanceof Error ? dbTestError.message : 'Connection error'
+        },
+        { status: 500 }
+      )
+    }
+
     const body: SignupData = await request.json()
     const { firstName, lastName, email, password } = body
 
@@ -35,11 +56,32 @@ export async function POST(request: NextRequest) {
 
     // Check if user already exists
     console.log('Checking if user exists with email:', email)
-    const { data: existingUser, error: checkError } = await supabaseAdmin
-      .from('users')
-      .select('email')
-      .eq('email', email)
-      .single()
+    console.log('SupabaseAdmin initialized:', !!supabaseAdmin)
+    console.log('Attempting to query users table...')
+    
+    let existingUser, checkError
+    
+    try {
+      const result = await supabaseAdmin
+        .from('users')
+        .select('email')
+        .eq('email', email)
+        .single()
+      
+      existingUser = result.data
+      checkError = result.error
+    } catch (queryError) {
+      console.error('Query execution error:', queryError)
+      return NextResponse.json(
+        { 
+          success: false, 
+          message: 'Database query failed',
+          details: queryError instanceof Error ? queryError.message : 'Unknown error',
+          queryError
+        },
+        { status: 500 }
+      )
+    }
 
     console.log('Existing user check result:', { existingUser, checkError })
 
