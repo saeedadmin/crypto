@@ -9,69 +9,71 @@ async function updateProfileHandler(request: AuthenticatedRequest): Promise<Next
   try {
     const userId = request.user.userId
     const body = await request.json()
-    const { email } = body
+    const { name, telegramId } = body
+
+    console.log('Update profile request:', { userId, name, telegramId })
 
     // Validation
-    if (!email) {
+    if (!name || name.trim().length < 2) {
       return NextResponse.json(
-        { success: false, message: 'Email is required' },
+        { success: false, message: 'نام باید حداقل ۲ کاراکتر باشد' },
         { status: 400 }
       )
     }
 
-    // Email format validation
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-    if (!emailRegex.test(email)) {
-      return NextResponse.json(
-        { success: false, message: 'Invalid email format' },
-        { status: 400 }
-      )
+    // Telegram ID validation (optional, must be numeric if provided)
+    if (telegramId && telegramId.trim() !== '') {
+      const telegramRegex = /^\d+$/
+      if (!telegramRegex.test(telegramId.trim())) {
+        return NextResponse.json(
+          { success: false, message: 'آیدی تلگرام باید فقط شامل اعداد باشد' },
+          { status: 400 }
+        )
+      }
     }
 
-    // Check if email is already taken by another user
-    const { data: existingUser } = await supabaseAdmin
-      .from('users')
-      .select('id')
-      .eq('email', email)
-      .neq('id', userId)
-      .single()
-
-    if (existingUser) {
-      return NextResponse.json(
-        { success: false, message: 'Email is already taken' },
-        { status: 409 }
-      )
+    // Prepare update data
+    const updateData: any = {
+      name: name.trim(),
+      updated_at: new Date().toISOString()
     }
+
+    // Add telegram_id only if provided
+    if (telegramId && telegramId.trim() !== '') {
+      updateData.telegram_id = telegramId.trim()
+      updateData.telegram_verified = false // Reset verification status when ID changes
+    }
+
+    console.log('Update data:', updateData)
 
     // Update user information
     const { data: updatedUser, error } = await supabaseAdmin
       .from('users')
-      .update({ 
-        email,
-        updated_at: new Date().toISOString()
-      })
+      .update(updateData)
       .eq('id', userId)
-      .select('id, email, created_at, updated_at')
+      .select('id, email, name, telegram_id, created_at, updated_at')
       .single()
 
     if (error) {
       console.error('Profile update error:', error)
       return NextResponse.json(
-        { success: false, message: 'Error updating profile' },
+        { success: false, message: 'خطا در به‌روزرسانی پروفایل' },
         { status: 500 }
       )
     }
 
     if (!updatedUser) {
       return NextResponse.json(
-        { success: false, message: 'User not found' },
+        { success: false, message: 'کاربر یافت نشد' },
         { status: 404 }
       )
     }
 
+    console.log('Profile updated successfully:', updatedUser)
+
     return NextResponse.json({
       success: true,
-      message: 'Profile updated successfully',
+      message: 'پروفایل با موفقیت به‌روزرسانی شد',
       user: updatedUser
     })
 

@@ -49,13 +49,12 @@ async function changePasswordHandler(request: AuthenticatedRequest): Promise<Nex
       )
     }
 
-    // New password validation
-    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d@$!%*?&]{8,}$/
-    if (!passwordRegex.test(newPassword)) {
+    // New password validation (simplified)
+    if (newPassword.length < 4) {
       return NextResponse.json(
         { 
           success: false, 
-          message: 'New password must be at least 8 characters and include uppercase, lowercase and numbers' 
+          message: 'رمز عبور جدید باید حداقل ۴ کاراکتر باشد' 
         },
         { status: 400 }
       )

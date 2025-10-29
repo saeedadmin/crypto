@@ -12,7 +12,7 @@ async function profileHandler(request: AuthenticatedRequest): Promise<NextRespon
     // Get user profile from database
     const { data: user, error } = await supabaseAdmin
       .from('users')
-      .select('id, email, created_at, updated_at')
+      .select('id, email, name, telegram_id, created_at, updated_at')
       .eq('id', userId)
       .single()
 

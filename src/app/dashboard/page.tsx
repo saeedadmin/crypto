@@ -3,6 +3,178 @@
 import { useAuth } from '@/contexts/AuthContext';
 import { useState } from 'react';
 
+// Profile Tab Component
+function ProfileTab({ user }: { user: any }) {
+  const [isEditing, setIsEditing] = useState(false);
+  const [formData, setFormData] = useState({
+    name: user?.name || '',
+    telegramId: user?.telegram_id || ''
+  });
+
+  const handleUpdateProfile = async () => {
+    try {
+      const token = localStorage.getItem('authToken');
+      const response = await fetch('/api/user/profile/update', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        setIsEditing(false);
+        // Refresh user data
+        window.location.reload();
+      } else {
+        alert('خطا در به‌روزرسانی پروفایل');
+      }
+    } catch (error) {
+      console.error('Profile update error:', error);
+      alert('خطا در ارتباط با سرور');
+    }
+  };
+
+  return (
+    <div className="dashboard-section">
+      <h2 className="section-title">اطلاعات پروفایل</h2>
+      <div className="profile-card">
+        <div className="profile-field">
+          <label>نام کاربر:</label>
+          {isEditing ? (
+            <input 
+              type="text" 
+              value={formData.name}
+              onChange={(e) => setFormData({...formData, name: e.target.value})}
+              className="profile-input"
+            />
+          ) : (
+            <span>{user?.name}</span>
+          )}
+        </div>
+        <div className="profile-field">
+          <label>ایمیل:</label>
+          <span>{user?.email}</span>
+        </div>
+        <div className="profile-field">
+          <label>آیدی تلگرام (اختیاری):</label>
+          {isEditing ? (
+            <input 
+              type="text" 
+              value={formData.telegramId}
+              onChange={(e) => setFormData({...formData, telegramId: e.target.value})}
+              placeholder="مثال: 123456789"
+              className="profile-input"
+            />
+          ) : (
+            <span>{user?.telegram_id || 'تنظیم نشده'}</span>
+          )}
+        </div>
+        <div className="profile-field">
+          <label>شناسه کاربری:</label>
+          <span className="text-xs text-gray-400">{user?.id}</span>
+        </div>
+        <div className="profile-actions">
+          {isEditing ? (
+            <>
+              <button onClick={handleUpdateProfile} className="auth-button primary">
+                ذخیره
+              </button>
+              <button onClick={() => setIsEditing(false)} className="auth-button secondary">
+                لغو
+              </button>
+            </>
+          ) : (
+            <button onClick={() => setIsEditing(true)} className="auth-button primary">
+              ویرایش پروفایل
+            </button>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// Security Tab Component  
+function SecurityTab() {
+  const handleChangePassword = () => {
+    window.location.href = '/auth/change-password';
+  };
+
+  const handleDeleteAccount = async () => {
+    if (confirm('آیا مطمئن هستید که می‌خواهید حساب خود را حذف کنید؟ این عمل غیرقابل برگشت است.')) {
+      const token = localStorage.getItem('authToken');
+      const response = await fetch('/api/user/delete', {
+        method: 'DELETE',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+        },
+      });
+
+      if (response.ok) {
+        localStorage.removeItem('authToken');
+        window.location.href = '/';
+      } else {
+        alert('خطا در حذف حساب');
+      }
+    }
+  };
+
+  return (
+    <div className="dashboard-section">
+      <h2 className="section-title">تنظیمات امنیتی</h2>
+      <div className="security-card">
+        <div className="security-item">
+          <h3>تغییر رمز عبور</h3>
+          <p>رمز عبور حساب خود را تغییر دهید</p>
+          <button onClick={handleChangePassword} className="auth-button secondary">
+            تغییر رمز عبور
+          </button>
+        </div>
+        <div className="security-item">
+          <h3>حذف حساب</h3>
+          <p>حساب خود را برای همیشه حذف کنید</p>
+          <button onClick={handleDeleteAccount} className="auth-button danger">
+            حذف حساب
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// Settings Tab Component
+function SettingsTab() {
+  return (
+    <div className="dashboard-section">
+      <h2 className="section-title">تنظیمات عمومی</h2>
+      <div className="settings-card">
+        <div className="setting-item">
+          <h3>اعلان‌ها</h3>
+          <p>تنظیمات اعلان‌های خود را مدیریت کنید</p>
+          <div className="setting-controls">
+            <label className="toggle-switch">
+              <input type="checkbox" defaultChecked />
+              <span className="toggle-slider"></span>
+            </label>
+          </div>
+        </div>
+        <div className="setting-item">
+          <h3>هشدار قیمت</h3>
+          <p>هنگام تغییر قیمت مطلع شوید</p>
+          <div className="setting-controls">
+            <label className="toggle-switch">
+              <input type="checkbox" defaultChecked />
+              <span className="toggle-slider"></span>
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function DashboardPage() {
   const { user, isAuthenticated, logout } = useAuth();
   const [activeTab, setActiveTab] = useState('profile');
@@ -32,7 +204,7 @@ export default function DashboardPage() {
         {/* Header */}
         <div className="dashboard-header">
           <h1 className="dashboard-title">Dashboard</h1>
-          <p className="dashboard-subtitle">Welcome back, {user?.email}!</p>
+          <p className="dashboard-subtitle">Welcome back, {user?.name || user?.email}!</p>
         </div>
 
         {/* Navigation Tabs */}
@@ -59,21 +231,9 @@ export default function DashboardPage() {
 
         {/* Tab Content */}
         <div className="dashboard-content">
-          {activeTab === 'profile' && (
-            <div className="dashboard-section">
-              <h2 className="section-title">Profile Information</h2>
-              <div className="profile-card">
-                <div className="profile-field">
-                  <label>Email:</label>
-                  <span>{user?.email}</span>
-                </div>
-                <div className="profile-field">
-                  <label>User ID:</label>
-                  <span className="text-xs text-gray-400">{user?.id}</span>
-                </div>
-              </div>
-            </div>
-          )}
+          {activeTab === 'profile' && <ProfileTab user={user} />}
+          {activeTab === 'security' && <SecurityTab />}
+          {activeTab === 'settings' && <SettingsTab />}
 
           {activeTab === 'security' && (
             <div className="dashboard-section">
