@@ -20,32 +20,50 @@ export async function POST(request: NextRequest) {
     const body: SignupData = await request.json()
     const { firstName, lastName, email, password } = body
 
-    console.log('Signup request:', { email, hasPassword: !!password })
+    console.log('Signup request:', { email, hasFirstName: !!firstName, hasLastName: !!lastName, hasPassword: !!password })
 
-    // Validation
-    if (!firstName || !lastName || !email || !password) {
+    // Enhanced Validation with specific error messages
+    if (!firstName || firstName.trim().length < 2) {
       return NextResponse.json(
-        { success: false, message: 'All fields are required' },
+        { success: false, message: 'نام باید حداقل ۲ کاراکتر باشد' },
+        { status: 400 }
+      )
+    }
+
+    if (!lastName || lastName.trim().length < 2) {
+      return NextResponse.json(
+        { success: false, message: 'نام خانوادگی باید حداقل ۲ کاراکتر باشد' },
+        { status: 400 }
+      )
+    }
+
+    if (!email) {
+      return NextResponse.json(
+        { success: false, message: 'ایمیل الزامی است' },
         { status: 400 }
       )
     }
 
     if (!validateEmail(email)) {
       return NextResponse.json(
-        { success: false, message: 'Invalid email format' },
+        { success: false, message: 'فرمت ایمیل نامعتبر است' },
         { status: 400 }
       )
     }
 
-    if (!validatePassword(password)) {
+    if (!password || password.length < 4) {
       return NextResponse.json(
         { 
           success: false, 
-          message: 'Password must be at least 6 characters' 
+          message: 'رمز عبور باید حداقل ۴ کاراکتر باشد' 
         },
         { status: 400 }
       )
     }
+
+    // Create full name from first and last name
+    const fullName = `${firstName.trim()} ${lastName.trim()}`.trim()
+    console.log('Full name created:', fullName)
 
     // Check if user already exists (using the same approach as test-connection)
     console.log('Checking user existence...')
@@ -95,10 +113,11 @@ export async function POST(request: NextRequest) {
       .insert([
         {
           email,
+          name: fullName,
           password_hash: passwordHash,
         }
       ])
-      .select('id, email, created_at, updated_at')
+      .select('id, email, name, created_at, updated_at')
       .single()
 
     console.log('Insert result:', { newUser, insertError })
