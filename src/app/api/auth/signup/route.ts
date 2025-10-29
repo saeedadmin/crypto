@@ -1,33 +1,26 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { supabaseAdmin } from '../lib/supabase'
+import { createClient } from '@supabase/supabase-js'
 import { hashPassword, validateEmail, validatePassword } from '../lib/auth-utils'
 import { SignupData } from '../lib/auth'
 
+// Create Supabase client directly like in test-connection endpoint
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!
+const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY!
+const supabaseAdmin = createClient(supabaseUrl, supabaseServiceKey)
+
 export async function POST(request: NextRequest) {
   try {
-    // First, test basic database connectivity
-    console.log('Testing database connection...')
-    try {
-      const { data: testData, error: testError } = await supabaseAdmin
-        .from('users')
-        .select('id')
-        .limit(1)
-      
-      console.log('DB connection test:', { testData, testError })
-    } catch (dbTestError) {
-      console.error('Database connection failed:', dbTestError)
-      return NextResponse.json(
-        { 
-          success: false, 
-          message: 'Database connection failed',
-          details: dbTestError instanceof Error ? dbTestError.message : 'Connection error'
-        },
-        { status: 500 }
-      )
-    }
+    console.log('=== SIGNUP START ===')
+    console.log('Environment check:', {
+      hasUrl: !!supabaseUrl,
+      hasKey: !!supabaseServiceKey,
+      url: supabaseUrl ? `${supabaseUrl.substring(0, 30)}...` : 'MISSING'
+    })
 
     const body: SignupData = await request.json()
     const { firstName, lastName, email, password } = body
+
+    console.log('Signup request:', { email, hasPassword: !!password })
 
     // Validation
     if (!firstName || !lastName || !email || !password) {
@@ -54,52 +47,35 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // Check if user already exists
-    console.log('Checking if user exists with email:', email)
-    console.log('SupabaseAdmin initialized:', !!supabaseAdmin)
-    console.log('Attempting to query users table...')
+    // Check if user already exists (using the same approach as test-connection)
+    console.log('Checking user existence...')
     
-    let existingUser, checkError
-    
-    try {
-      const result = await supabaseAdmin
-        .from('users')
-        .select('email')
-        .eq('email', email)
-        .single()
-      
-      existingUser = result.data
-      checkError = result.error
-    } catch (queryError) {
-      console.error('Query execution error:', queryError)
+    const { data: existingUser, error: checkError } = await supabaseAdmin
+      .from('users')
+      .select('email')
+      .eq('email', email)
+      .maybeSingle() // This is the key - using maybeSingle() like test endpoint
+
+    console.log('User check result:', { 
+      existingUser, 
+      checkError: checkError?.message,
+      errorCode: checkError?.code 
+    })
+
+    if (checkError && checkError.code !== 'PGRST116') {
+      console.error('Database error:', checkError)
       return NextResponse.json(
         { 
           success: false, 
-          message: 'Database query failed',
-          details: queryError instanceof Error ? queryError.message : 'Unknown error',
-          queryError
-        },
-        { status: 500 }
-      )
-    }
-
-    console.log('Existing user check result:', { existingUser, checkError })
-
-    if (checkError) {
-      console.error('Error checking existing user:', checkError)
-      return NextResponse.json(
-        { 
-          success: false, 
-          message: 'Error checking user existence',
-          details: checkError.message,
-          error: checkError
+          message: 'Database error',
+          details: checkError.message
         },
         { status: 500 }
       )
     }
 
     if (existingUser) {
-      console.log('User already exists, returning error')
+      console.log('User already exists')
       return NextResponse.json(
         { success: false, message: 'User with this email already exists' },
         { status: 409 }
@@ -107,12 +83,14 @@ export async function POST(request: NextRequest) {
     }
 
     // Hash password
+    console.log('Hashing password...')
     const passwordHash = await hashPassword(password)
-    console.log('Password hashed successfully')
+    console.log('Password hashed')
 
     // Insert user (without name field since it's not in your schema)
-    console.log('Attempting to insert user with email:', email)
-    const { data: newUser, error } = await supabaseAdmin
+    console.log('Creating new user...')
+    
+    const { data: newUser, error: insertError } = await supabaseAdmin
       .from('users')
       .insert([
         {
@@ -123,21 +101,21 @@ export async function POST(request: NextRequest) {
       .select('id, email, created_at, updated_at')
       .single()
 
-    console.log('Insert result:', { newUser, error })
+    console.log('Insert result:', { newUser, insertError })
 
-    if (error) {
-      console.error('Supabase signup error:', error)
+    if (insertError) {
+      console.error('Insert error:', insertError)
       return NextResponse.json(
         { 
           success: false, 
           message: 'Error creating user account',
-          details: error.message,
-          error: error
+          details: insertError.message
         },
         { status: 500 }
       )
     }
 
+    console.log('=== SIGNUP SUCCESS ===')
     return NextResponse.json({
       success: true,
       message: 'Account created successfully',
@@ -147,7 +125,11 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     console.error('Signup error:', error)
     return NextResponse.json(
-      { success: false, message: 'Internal server error' },
+      { 
+        success: false, 
+        message: 'Internal server error',
+        details: error instanceof Error ? error.message : 'Unknown error'
+      },
       { status: 500 }
     )
   }
